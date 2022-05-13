@@ -12,7 +12,7 @@
 				"name": "Python : Fichier actuel",
 				"type": "python",
 				"request": "launch",
-				"program": "app.py",
+				"program": "src/app.py",
 				"console": "integratedTerminal",
 				"justMyCode": true
 			}

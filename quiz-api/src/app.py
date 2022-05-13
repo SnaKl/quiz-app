@@ -1,5 +1,6 @@
 from flask import Flask, request
-from jwt_utils import *
+import jwt_utils as jwtu
+from endpoints.question import createQuestion
 
 app = Flask(__name__)
 
@@ -26,10 +27,14 @@ def login():
     #TODO: Mettre ça dans une variable d'environnement !
     if password == "Vive l'ESIEE !":
         #On génère un token
-        token = build_token()
+        token = jwtu.build_token()
         return {"token": token}, 200
     
     return {"error": "Invalid Password"}, 401
+
+@app.route('/questions', methods=['POST'])
+def post_question():
+    return createQuestion()
 
 if __name__ == "__main__":
     app.run(ssl_context='adhoc')
