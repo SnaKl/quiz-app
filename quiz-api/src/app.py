@@ -1,6 +1,7 @@
 from flask import Flask, request
 import jwt_utils as jwtu
 from endpoints.question import createQuestion
+from utils import secured_endpoint
 
 app = Flask(__name__)
 
@@ -33,6 +34,7 @@ def login():
     return {"error": "Invalid Password"}, 401
 
 @app.route('/questions', methods=['POST'])
+@secured_endpoint
 def post_question():
     return createQuestion()
 
