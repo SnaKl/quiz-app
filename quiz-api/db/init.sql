@@ -1,7 +1,17 @@
-CREATE TABLE Question (
-    _id INT PRIMARY KEY AUTOINCREMENT,
-    position INT,
-    titre VARCHAR(255),
-    content TEXT,
-    img TEXT
+CREATE TABLE IF NOT EXISTS "Question" (
+	"_id"	INTEGER NOT NULL UNIQUE,
+	"position"	INTEGER NOT NULL UNIQUE,
+	"title"	TEXT NOT NULL,
+	"text"	TEXT NOT NULL,
+	"image"	TEXT,
+	PRIMARY KEY("_id" AUTOINCREMENT)
+);
+
+CREATE TABLE IF NOT EXISTS "Answer" (
+	"_id"	INTEGER NOT NULL UNIQUE,
+	"text"	TEXT NOT NULL,
+	"isCorrect"	INTEGER NOT NULL,
+    "question" INTEGER NOT NULL,
+	PRIMARY KEY("_id" AUTOINCREMENT),
+    FOREIGN KEY("question") REFERENCES "Question"("_id")
 );
