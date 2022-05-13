@@ -25,6 +25,10 @@ class Question():
             return Question(_id, position, title, text, image)
         else:
             return Question(-1, position, title, text, image)
+    
+    def fromSQLResponse(row: tuple):
+        return Question(row[0], row[1], row[2], row[3], row[4])
+
 
     def insertSQL(self):
         if self._id != -1:
@@ -32,6 +36,13 @@ class Question():
         else:
             return f"INSERT INTO Question(position, titre, content, img) VALUES ({self.position}, \"{self.title}\", \"{self.text}\", \"{self.image}\");"
 
+    def updateSQL(self):
+        return f"UPDATE Question SET position={self.position}, titre=\"{self.title}\", content=\"{self.text}\", img=\"{self.image}\" WHERE _id={self._id};"
 
-# On rend statique la méthode fromJSON
+    def getAllQuestionsSQL():
+        return "SELECT * FROM Question;"
+
+# On rend statique des méthodes
 Question.fromJSON = staticmethod(Question.fromJSON)
+Question.getAllQuestionsSQL = staticmethod(Question.getAllQuestionsSQL)
+Question.fromSQLResponse = staticmethod(Question.fromSQLResponse)

@@ -23,12 +23,17 @@ def secured_endpoint(f):
         return f(*args, **kwargs)
     return decorator
 
-def sendRequest(sqlRequest):
+def getConnection():
     #création d'un objet connection
     db_connection = sqlite3.connect("db/db.db")
     # set the sqlite connection in "manual transaction mode"
     # (by default, all execute calls are performed in their own transactions, not what we want)
     db_connection.isolation_level = None
+
+    return db_connection
+
+def sendRequest(sqlRequest):
+    db_connection = getConnection()
 
     #On l'insert en base de données
     cursor = db_connection.cursor()
@@ -46,3 +51,13 @@ def sendRequest(sqlRequest):
         #in case of exception, roolback the transaction
         cursor.execute('rollback')
         raise err
+
+def getRequest(sqlRequest):
+    db_connection = getConnection()
+
+    #On l'insert en base de données
+    cursor = db_connection.cursor()
+
+    cursor.execute(sqlRequest)
+
+    return cursor.fetchall()

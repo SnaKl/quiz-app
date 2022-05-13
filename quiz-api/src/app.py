@@ -33,6 +33,10 @@ def login():
     
     return {"error": "Invalid Password"}, 401
 
+
+"""
+SECTION QUESTIONS
+"""
 @app.route('/questions', methods=['POST'])
 @secured_endpoint
 def post_question():
