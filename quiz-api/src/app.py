@@ -1,6 +1,6 @@
 from flask import Flask, request
 import jwt_utils as jwtu
-from endpoints.question import createQuestion
+from endpoints.question import createQuestion, deleteQuestion
 from utils import secured_endpoint
 
 app = Flask(__name__)
@@ -41,6 +41,11 @@ SECTION QUESTIONS
 @secured_endpoint
 def post_question():
     return createQuestion()
+
+@app.route('/questions/<pos>', methods=['DELETE'])
+@secured_endpoint
+def delete_question(pos):
+    return deleteQuestion(pos)
 
 if __name__ == "__main__":
     app.run(ssl_context='adhoc')

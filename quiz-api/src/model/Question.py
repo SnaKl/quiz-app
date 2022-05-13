@@ -38,6 +38,9 @@ class Question():
 
     def updateSQL(self):
         return f"UPDATE Question SET position={self.position}, titre=\"{self.title}\", content=\"{self.text}\", img=\"{self.image}\" WHERE _id={self._id};"
+    
+    def deleteSQL(position: int):
+        return f"DELETE FROM Question WHERE position = {position};"
 
     def getAllQuestionsSQL():
         return "SELECT * FROM Question;"
@@ -46,3 +49,4 @@ class Question():
 Question.fromJSON = staticmethod(Question.fromJSON)
 Question.getAllQuestionsSQL = staticmethod(Question.getAllQuestionsSQL)
 Question.fromSQLResponse = staticmethod(Question.fromSQLResponse)
+Question.deleteSQL = staticmethod(Question.deleteSQL)

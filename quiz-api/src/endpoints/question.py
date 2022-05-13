@@ -29,3 +29,28 @@ def createQuestion():
     sendRequest(question.insertSQL())
 
     return {"status": "OK"}, 200
+
+def deleteQuestion(pos):
+    try:
+        pos = int(pos)
+    except Exception:
+        return {"error": "Position argument in url must be a number"}, 400
+
+    questions = getRequest(Question.getAllQuestionsSQL())
+    questions = list(map(lambda row: Question.fromSQLResponse(row), questions))
+    questions.sort(key=lambda q: q.position)
+    questions = questions[pos:]
+
+    try:
+        sendRequest(Question.deleteSQL(pos))
+    except Exception:
+        return {"error": "Unable to delete question"}, 400
+
+    #On update la position des questions après cette question
+    for q in questions:
+            q.position -= 1
+            
+            #On Update en BDD
+            sendRequest(q.updateSQL())
+
+    return {}, 204
