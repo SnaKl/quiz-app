@@ -4,6 +4,19 @@ from jwt_utils import JwtError, decode_token
 from model.Question import Question
 from utils import getRequest, sendRequest
 
+def getQuestion(pos):
+    try:
+        pos = int(pos)
+    except Exception:
+        return {"error": "Position argument in url must be a number"}, 400
+    row = getRequest(Question.getSQL(pos))
+    if(len(row)) == 0:
+        return {"error": "Question not found"}, 404
+
+    question = Question.fromSQLResponse(row[0])
+
+    return question.toJSON(), 200
+
 def createQuestion():
     #récupèrer un l'objet json envoyé dans le body de la requète
     question = Question.fromJSON(request.get_json())

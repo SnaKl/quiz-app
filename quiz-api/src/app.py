@@ -1,6 +1,6 @@
 from flask import Flask, request
 import jwt_utils as jwtu
-from endpoints.question import createQuestion, deleteQuestion
+from endpoints.question import createQuestion, deleteQuestion, getQuestion
 from utils import secured_endpoint
 
 app = Flask(__name__)
@@ -37,6 +37,10 @@ def login():
 """
 SECTION QUESTIONS
 """
+@app.route('/questions/<pos>', methods=['GET'])
+def get_question(pos):
+    return getQuestion(pos)
+
 @app.route('/questions', methods=['POST'])
 @secured_endpoint
 def post_question():

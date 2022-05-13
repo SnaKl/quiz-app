@@ -41,6 +41,9 @@ class Question():
     
     def deleteSQL(position: int):
         return f"DELETE FROM Question WHERE position = {position};"
+    
+    def getSQL(position: int):
+        return f"SELECT * FROM Question WHERE position = {position};"
 
     def getAllQuestionsSQL():
         return "SELECT * FROM Question;"
@@ -50,3 +53,5 @@ Question.fromJSON = staticmethod(Question.fromJSON)
 Question.getAllQuestionsSQL = staticmethod(Question.getAllQuestionsSQL)
 Question.fromSQLResponse = staticmethod(Question.fromSQLResponse)
 Question.deleteSQL = staticmethod(Question.deleteSQL)
+Question.getSQL = staticmethod(Question.getSQL)
+
