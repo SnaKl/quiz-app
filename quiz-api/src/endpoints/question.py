@@ -1,4 +1,3 @@
-from msilib.schema import Error
 from flask import request
 from jwt_utils import JwtError, decode_token
 from model.Question import Question
