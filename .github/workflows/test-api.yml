@@ -45,10 +45,10 @@ jobs:
       run: |
         cd quiz-api && flask run &
         sleep 2
-        cd tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
-        cd tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
-        cd tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
-        cd tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
+        cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
+        cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
+        cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
+        cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
         kill -9 `lsof -i:5000 -t`
       env:
         FLASK_ENV: development
