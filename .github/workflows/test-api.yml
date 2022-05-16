@@ -39,16 +39,16 @@ jobs:
         if [ -f quiz-api/requirements.txt ]; then pip install -r quiz-api/requirements.txt; fi
   
     - name: Install Newman dependency
-      run: npm install --prefix quiz-api/tests
+      run: npm install -g newman
 
     - name: Run the API and Postman's tests
       run: |
         cd quiz-api && flask run &
         sleep 2
-        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections1.json -e postman/environment.json --insecure
-        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections2.json -e postman/environment.json --insecure
-        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections3.json -e postman/environment.json --insecure
-        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections4.json -e postman/environment.json --insecure
+        cd tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
+        cd tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
+        cd tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
+        cd tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
         kill -9 `lsof -i:5000 -t`
       env:
         FLASK_ENV: development
