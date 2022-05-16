@@ -41,16 +41,21 @@ jobs:
     - name: Install Newman dependency
       run: npm install -g newman
 
+    - name: Run the server
+      run: |
+        cd quiz-api && flask run & 
+        sleep 2
+
     - name: Run the API and Postman's tests
       run: |
-        cd quiz-api && flask run &
-        sleep 2
-        cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
-        cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
-        cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
-        cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
-        kill -9 `lsof -i:5000 -t`
+        cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure -x
+        cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure -x
+        cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure -x
+        cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure -x
       env:
         FLASK_ENV: development
         API_HOST: 0.0.0.0
         FLASK_APP: src/app.py
+    
+    - name: Kill server
+      run: kill -9 `lsof -i:5000 -t`
