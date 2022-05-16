@@ -12,10 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FLASK_ENV: development
-      API_HOST: 0.0.0.0
-      FLASK_APP: src/app.py
     strategy:
       matrix:
         node-version: [12.x]
@@ -52,23 +48,23 @@ jobs:
 
       - name: Run the server
         run: |
-          cd quiz-api && flask run & 
+          python quiz-api/src/app.py & 
           sleep 2
 
       - name: Run Postman collections 1
-        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme  > testResults/resultCollections1.html
+        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 2
-        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme  > testResults/resultCollections2.html
+        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 3
-        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme  > testResults/resultCollections3.html
+        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 4
-        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme  > testResults/resultCollections4.html
+        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Kill server
