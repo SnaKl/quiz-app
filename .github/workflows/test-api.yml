@@ -56,29 +56,29 @@ jobs:
           sleep 2
 
       - name: Run Postman collections 1
-        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/resultCollections1.html
+        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme  > testResults/resultCollections1.html
         if: success() || failure()
 
       - name: Run Postman collections 2
-        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/resultCollections2.html
+        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme  > testResults/resultCollections2.html
         if: success() || failure()
 
       - name: Run Postman collections 3
-        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/resultCollections3.html
+        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme  > testResults/resultCollections3.html
         if: success() || failure()
 
       - name: Run Postman collections 4
-        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/resultCollections4.html
+        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme  > testResults/resultCollections4.html
         if: success() || failure()
 
       - name: Kill server
         run: kill -9 `lsof -i:5000 -t`
-        if:
-          success() || failure()
+        if: success() || failure()
 
-          # Upload the contents of Test Results directory to workspace
+      # Upload the contents of Test Results directory to workspace
       - name: Output the run Details
         uses: actions/upload-artifact@v2
+        if: success() || failure()
         with:
           name: RunReports
           path: testResults
