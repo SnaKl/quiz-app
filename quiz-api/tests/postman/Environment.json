@@ -1,0 +1,21 @@
+{
+	"id": "62babbf2-93d8-4855-bfb9-a9a686e021e4",
+	"name": "Environment",
+	"values": [
+		{
+			"key": "MainDNS",
+			"value": "https://127.0.0.1",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "Port",
+			"value": "8080",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2022-05-16T10:08:35.187Z",
+	"_postman_exported_using": "Postman/9.18.2"
+}

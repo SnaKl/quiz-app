@@ -1,0 +1,56 @@
+name: CI - Test de l'API
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ main, ajout_ci_cd ]
+  pull_request:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+        python-version: [3.7]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Git checkout 
+      uses: actions/checkout@v2
+
+    #nécéssaire pour faire les tests avec newman (pour les collections postman)
+    - name: Install Node JS ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f quiz-api/requirements.txt ]; then pip install -r quiz-api/requirements.txt; fi
+  
+    - name: Install Newman dependency
+      run: npm install --prefix quiz-api/tests
+
+    - name: Run the API and Postman's tests
+      run: |
+        cd quiz-api && flask run &
+        sleep 2
+        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections1.json -e postman/environment.json --insecure
+        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections2.json -e postman/environment.json --insecure
+        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections3.json -e postman/environment.json --insecure
+        cd quiz-api/tests && ./node_modules/newman/bin/newman.js run postman/Collections4.json -e postman/environment.json --insecure
+        kill -9 `lsof -i:5000 -t`
+      env:
+        FLASK_ENV: development
+        API_HOST: 0.0.0.0
+        FLASK_APP: src/app.py
