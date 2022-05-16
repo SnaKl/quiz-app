@@ -32,12 +32,12 @@ class Question():
 
     def insertSQL(self):
         if self._id != -1:
-            return f"INSERT INTO Question(_id, position, titre, content, img) VALUES ({self._id}, {self.position}, \"{self.title}\", \"{self.text}\", \"{self.image}\");"
+            return f"INSERT INTO Question(_id, position, title, text, image) VALUES ({self._id}, {self.position}, \"{self.title}\", \"{self.text}\", \"{self.image}\");"
         else:
-            return f"INSERT INTO Question(position, titre, content, img) VALUES ({self.position}, \"{self.title}\", \"{self.text}\", \"{self.image}\");"
+            return f"INSERT INTO Question(position, title, text, image) VALUES ({self.position}, \"{self.title}\", \"{self.text}\", \"{self.image}\");"
 
     def updateSQL(self):
-        return f"UPDATE Question SET position={self.position}, titre=\"{self.title}\", content=\"{self.text}\", img=\"{self.image}\" WHERE _id={self._id};"
+        return f"UPDATE Question SET position={self.position}, title=\"{self.title}\", text=\"{self.text}\", image=\"{self.image}\" WHERE _id={self._id};"
     
     def deleteSQL(position: int):
         return f"DELETE FROM Question WHERE position = {position};"
