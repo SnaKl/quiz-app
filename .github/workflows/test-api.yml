@@ -4,7 +4,7 @@ name: CI - Test de l'API
 # events but only for the master branch
 on:
   push:
-    branches: [main, ajout_ci_cd]
+    branches: [main]
   pull_request:
     branches: [main]
 
