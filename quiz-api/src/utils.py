@@ -1,8 +1,12 @@
+from fileinput import close
 from functools import wraps
 import sqlite3
 from flask import jsonify, make_response, request
 import jwt
 from jwt_utils import JwtError, decode_token
+from os.path import exists
+
+initialized = exists("db/db.db")
 
 # Authentication decorator
 def secured_endpoint(f):
@@ -23,12 +27,27 @@ def secured_endpoint(f):
         return f(*args, **kwargs)
     return decorator
 
+def initializeDatabase(conn):
+    global initialized
+    #Permet de lancer le fichier "init.sql" si la bdd n'as pas été initialisé
+    initialized = True
+    sqlFile = open("db/init.sql", "r")
+    sqlScript = sqlFile.read()
+    sqlFile.close()
+
+    conn.cursor().executescript(sqlScript)
+
+
 def getConnection():
     #création d'un objet connection
     db_connection = sqlite3.connect("db/db.db")
     # set the sqlite connection in "manual transaction mode"
     # (by default, all execute calls are performed in their own transactions, not what we want)
     db_connection.isolation_level = None
+
+    if not initialized:
+        print("On initialise la base de données")
+        initializeDatabase(db_connection)
 
     return db_connection
 
