@@ -52,19 +52,19 @@ jobs:
 
     - name: Run Postman collections 1
       continue-on-error: true
-      run: cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure -x
+      run: cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
 
     - name: Run Postman collections 2
       continue-on-error: true
-      run: cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure -x
+      run: cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
 
     - name: Run Postman collections 3
       continue-on-error: true
-      run: cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure -x
+      run: cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
 
     - name: Run Postman collections 4
       continue-on-error: true
-      run: cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure -x
+      run: cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
     
     - name: Kill server
       run: kill -9 `lsof -i:5000 -t`
