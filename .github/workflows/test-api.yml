@@ -52,20 +52,20 @@ jobs:
 
     - name: Run Postman collections 1
       run: cd quiz-api/tests && newman run postman/Collections1.json -e postman/Environment.json --insecure
-      if: always()
+      if: success() || failure()
 
     - name: Run Postman collections 2
       run: cd quiz-api/tests && newman run postman/Collections2.json -e postman/Environment.json --insecure
-      if: always()
+      if: success() || failure()
 
     - name: Run Postman collections 3
       run: cd quiz-api/tests && newman run postman/Collections3.json -e postman/Environment.json --insecure
-      if: always()
+      if: success() || failure()
 
     - name: Run Postman collections 4
       run: cd quiz-api/tests && newman run postman/Collections4.json -e postman/Environment.json --insecure
-      if: always()
+      if: success() || failure()
     
     - name: Kill server
       run: kill -9 `lsof -i:5000 -t`
-      if: always()
+      if: success() || failure()
