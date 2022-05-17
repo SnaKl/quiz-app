@@ -48,7 +48,7 @@ jobs:
 
       - name: Run the server
         run: |
-          python quiz-api/src/app.py & 
+          python quiz-api/src/app.py > testResults/logs.txt & 
           sleep 2
 
       - name: Run Postman collections 1
