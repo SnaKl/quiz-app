@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "Question" (
 	"_id"	INTEGER NOT NULL UNIQUE,
-	"position"	INTEGER NOT NULL UNIQUE,
+	"position"	INTEGER NOT NULL,
 	"title"	TEXT NOT NULL,
 	"text"	TEXT NOT NULL,
 	"image"	TEXT,
