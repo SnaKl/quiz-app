@@ -1,6 +1,6 @@
 from flask import Flask, request
 import jwt_utils as jwtu
-from endpoints.question import createQuestion, deleteQuestion, getQuestion
+from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion
 from utils import secured_endpoint
 
 app = Flask(__name__)
@@ -50,6 +50,11 @@ def post_question():
 @secured_endpoint
 def delete_question(pos):
     return deleteQuestion(pos)
+
+@app.route('/questions/<pos>', methods=['PUT'])
+@secured_endpoint
+def update_question(pos):
+    return updateQuestion(pos)
 
 if __name__ == "__main__":
     app.run(ssl_context='adhoc')

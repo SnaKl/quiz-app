@@ -14,6 +14,8 @@ def getQuestion(pos):
         return {"error": "Question not found"}, 404
 
     question = Question.fromSQLResponse(row[0])
+
+    #On fetch les réponses
     answers = getRequest(question.fetchPossibleAnswersSQL())
     answers = list(map(Answer.fromSQLResponse, answers))
     question.setPossibleAnswers(answers)
@@ -46,6 +48,60 @@ def createQuestion():
     id = sendRequest(question.insertSQL())
     for answer in question.possibleAnswers:
         answer.questionId = id
+        sendRequest(answer.insertSQL())
+
+    return {"status": "OK"}, 200
+
+def updateQuestion(pos):
+    #récupèrer un l'objet json envoyé dans le body de la requète
+    newQuestion = Question.fromJSON(request.get_json())
+
+    try:
+        pos = int(pos)
+    except Exception:
+        return {"error": "Position argument in url must be a number"}, 400
+    
+    row = getRequest(Question.getSQL(pos))
+    if(len(row)) == 0:
+        return {"error": "Question not found"}, 404
+
+    question = Question.fromSQLResponse(row[0])
+
+    #On fetch les réponses
+    answers = getRequest(question.fetchPossibleAnswersSQL())
+    answers = list(map(Answer.fromSQLResponse, answers))
+    question.setPossibleAnswers(answers)
+
+    #Si la position courante et la nouvelle position sont différente, on update les positions des autres questions (osskour)
+    if question.position != newQuestion.position:
+        #On récupères toutes les questions pour décaler
+        questions = getRequest(Question.getAllQuestionsSQL())
+        questions = list(map(lambda row: Question.fromSQLResponse(row), questions))
+
+        #On vérifie si la nouvelle position est valide
+        if newQuestion.position <= 0 and newQuestion.position > len(questions):
+            return {"error": f"Invalid Position, min=1 and max={len(questions)}"}, 400
+        
+        #On Commence par décaler toutes les positions de -1 (comme si on avais supprimé la question)
+        for q in questions:
+            if q.position < question.position:
+                q.position -= 1
+
+        #Puis, on adapte
+        for q in questions:
+            if q.position >= newQuestion.position:
+                q.position += 1
+                #On Update en BDD
+                sendRequest(q.updateSQL())
+
+    #On delete toutes les réponses et on les recrées
+    sendRequest(question.deletePossibleAnswersSQL())
+
+    #On update la question et les réponses
+    newQuestion._id = question._id
+    sendRequest(newQuestion.updateSQL())
+    for answer in newQuestion.possibleAnswers:
+        answer.questionId = newQuestion._id
         sendRequest(answer.insertSQL())
 
     return {"status": "OK"}, 200
