@@ -1,5 +1,6 @@
 from flask import request
 from jwt_utils import JwtError, decode_token
+from model.Answer import Answer
 from model.Question import Question
 from utils import getRequest, sendRequest
 
@@ -13,6 +14,9 @@ def getQuestion(pos):
         return {"error": "Question not found"}, 404
 
     question = Question.fromSQLResponse(row[0])
+    answers = getRequest(question.fetchPossibleAnswersSQL())
+    answers = list(map(Answer.fromSQLResponse, answers))
+    question.setPossibleAnswers(answers)
 
     return question.toJSON(), 200
 
@@ -37,8 +41,12 @@ def createQuestion():
             
             #On Update en BDD
             sendRequest(q.updateSQL())
+    
 
-    sendRequest(question.insertSQL())
+    id = sendRequest(question.insertSQL())
+    for answer in question.possibleAnswers:
+        answer.questionId = id
+        sendRequest(answer.insertSQL())
 
     return {"status": "OK"}, 200
 

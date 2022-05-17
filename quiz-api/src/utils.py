@@ -64,8 +64,10 @@ def sendRequest(sqlRequest):
         # save the question to db
         cursor.execute(sqlRequest)
 
+        id = cursor.lastrowid
         #send the request
         cursor.execute("commit")
+        return id
     except Exception as err:
         #in case of exception, roolback the transaction
         cursor.execute('rollback')

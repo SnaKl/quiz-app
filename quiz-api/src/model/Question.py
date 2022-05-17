@@ -1,5 +1,7 @@
 import json
 
+from model.Answer import Answer
+
 
 class Question():
 
@@ -9,6 +11,17 @@ class Question():
         self.title = title
         self.text = text
         self.image = image
+        # On ne les fetch pas par défaut
+        self.possibleAnswers = []
+    
+    def setPossibleAnswers(self, possibleAnswers):
+        self.possibleAnswers = possibleAnswers 
+
+    def fetchPossibleAnswersSQL(self):
+        return f"SELECT * FROM Answer WHERE questionId = {self._id};"
+    
+    def deletePossibleAnswersSQL(self):
+        return f"DELETE FROM Answer WHERE questionId = {self._id};"
 
     def toJSON(self):
         return json.dumps(self,  default=lambda o: o.__dict__, indent=2)
@@ -21,10 +34,20 @@ class Question():
         text = json["text"]
         image = json["image"]
 
+        question = None
         if "_id" in json:
-            return Question(_id, position, title, text, image)
+            question = Question(_id, position, title, text, image)
         else:
-            return Question(-1, position, title, text, image)
+            question = Question(-1, position, title, text, image)
+        
+        #On parse les réponses
+        reponses = []
+        for answer in json["possibleAnswers"]:
+            reponses.append(Answer.fromJSON(answer, question._id))
+
+        question.setPossibleAnswers(reponses)
+
+        return question
     
     def fromSQLResponse(row: tuple):
         return Question(row[0], row[1], row[2], row[3], row[4])

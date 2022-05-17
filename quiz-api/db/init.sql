@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "Answer" (
 	"_id"	INTEGER NOT NULL UNIQUE,
 	"text"	TEXT NOT NULL,
 	"isCorrect"	INTEGER NOT NULL,
-    "question" INTEGER NOT NULL,
+    "questionId" INTEGER NOT NULL,
 	PRIMARY KEY("_id" AUTOINCREMENT),
-    FOREIGN KEY("question") REFERENCES "Question"("_id")
+    FOREIGN KEY("questionId") REFERENCES "Question"("_id") ON DELETE CASCADE
 );
