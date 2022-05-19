@@ -67,10 +67,6 @@ jobs:
         run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
-      - name: Print environnement
-        run: cat quiz-api/tests/postman/Environment.json
-        if: success() || failure()
-
       - name: Kill server
         run: kill -9 `lsof -i:5000 -t`
         if: success() || failure()
