@@ -57,19 +57,19 @@ jobs:
           sleep 2
 
       - name: Run Postman collections 1
-        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junit --reporter-junit-export 'testResults/jest-1.xml'
+        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-1.xml'
         if: success() || failure()
 
       - name: Run Postman collections 2
-        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junit --reporter-junit-export 'testResults/jest-2.xml'
+        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-2.xml'
         if: success() || failure()
 
       - name: Run Postman collections 3
-        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junit --reporter-junit-export 'testResults/jest-3.xml'
+        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-3.xml'
         if: success() || failure()
 
       - name: Run Postman collections 4
-        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junit --reporter-junit-export 'testResults/jest-4.xml'
+        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-4.xml'
         if: success() || failure()
 
       - name: Kill server
