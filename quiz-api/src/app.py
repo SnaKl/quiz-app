@@ -1,7 +1,9 @@
 from urllib.request import Request
 from flask import Flask, request
+from endpoints.participation import createParticipation, deleteAllParticipations
 import jwt_utils as jwtu
 from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion
+from model.Participation import Participation
 from model.Question import Question
 from utils import getRequest, secured_endpoint
 
@@ -14,7 +16,9 @@ def hello_world():
 
 @app.route('/quiz-info', methods=['GET'])
 def GetQuizInfo():
-    return {"size": len(getRequest(Question.getAllQuestionsSQL())), "scores": []}, 200
+    particpipations = list(map(lambda part: Participation.fromSQLResponse(part).toDict(), getRequest(Participation.getAllSQL())))
+    particpipations.sort(key= lambda participation: participation["score"], reverse= True)
+    return {"size": len(getRequest(Question.getAllQuestionsSQL())), "scores": particpipations}, 200
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -57,6 +61,18 @@ def delete_question(pos):
 @secured_endpoint
 def update_question(pos):
     return updateQuestion(pos)
+
+"""
+SECTION REPONSES
+"""
+@app.route('/participations', methods=['POST'])
+def addParticipation():
+    return createParticipation()
+
+@app.route('/participations', methods=['DELETE'])
+@secured_endpoint
+def deleteParticipations():
+    return deleteAllParticipations()
 
 if __name__ == "__main__":
     app.run(ssl_context='adhoc')
