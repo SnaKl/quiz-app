@@ -1,7 +1,9 @@
+from urllib.request import Request
 from flask import Flask, request
 import jwt_utils as jwtu
 from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion
-from utils import secured_endpoint
+from model.Question import Question
+from utils import getRequest, secured_endpoint
 
 app = Flask(__name__)
 
@@ -12,7 +14,7 @@ def hello_world():
 
 @app.route('/quiz-info', methods=['GET'])
 def GetQuizInfo():
-	return {"size": 0, "scores": []}, 200
+    return {"size": len(getRequest(Question.getAllQuestionsSQL())), "scores": []}, 200
 
 @app.route('/login', methods=['POST'])
 def login():
