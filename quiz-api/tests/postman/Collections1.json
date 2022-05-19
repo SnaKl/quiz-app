@@ -353,67 +353,6 @@
 					"response": []
 				},
 				{
-					"name": "Get all questions (draft)",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"// pm.test(\"Request respond ok\", function () {\r",
-									"//     pm.response.to.have.status(200);\r",
-									"// });\r",
-									"\r",
-									"// pm.test(\"Request respond json\", function () {\r",
-									"//     pm.response.to.not.be.error;\r",
-									"//     pm.response.to.have.jsonBody();\r",
-									"//     pm.response.to.not.have.jsonBody(\"error\");\r",
-									"// });\r",
-									"\r",
-									"// Question = pm.response.json()\r",
-									"\r",
-									"// pm.test(\"Return henry IV question\", function () {\r",
-									"//     pm.expect(Question.title).to.equal(\"Dummy Question\");\r",
-									"//     pm.expect(Question.text).to.equal(\"Quelle est la couleur du cheval blanc d'Henry IV ?\");\r",
-									"//     pm.expect(Question.position).to.equal(1);\r",
-									"//     pm.expect(Question.image).to.equal(\"falseb64imagecontent\");\r",
-									"// });\r",
-									"\r",
-									"// pm.test(\"Possible questions are the proper ones\", function () {\r",
-									"//     pm.expect(Question.possibleAnswers.length).to.equal(4);\r",
-									"//     pm.expect(Question.possibleAnswers[0].text).to.equal(\"Noir\");\r",
-									"//     pm.expect(Question.possibleAnswers[0].isCorrect).to.equal(false);\r",
-									"//     pm.expect(Question.possibleAnswers[1].text).to.equal(\"Gris\");\r",
-									"//     pm.expect(Question.possibleAnswers[1].isCorrect).to.equal(false);\r",
-									"//     pm.expect(Question.possibleAnswers[2].text).to.equal(\"Blanc\");\r",
-									"//     pm.expect(Question.possibleAnswers[2].isCorrect).to.equal(true);\r",
-									"//     pm.expect(Question.possibleAnswers[3].text).to.equal(\"La réponse D\");\r",
-									"//     pm.expect(Question.possibleAnswers[3].isCorrect).to.equal(false);\r",
-									"// });\r",
-									"\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{MainDNS}}:{{Port}}/questions",
-							"host": [
-								"{{MainDNS}}"
-							],
-							"port": "{{Port}}",
-							"path": [
-								"questions"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update question",
 					"event": [
 						{
@@ -2283,7 +2222,7 @@
 					"response": []
 				},
 				{
-					"name": "Get quiz-info with scores (no asserts yet)",
+					"name": "Get quiz-info with scores",
 					"event": [
 						{
 							"listen": "test",
