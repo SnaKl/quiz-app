@@ -4,7 +4,7 @@ name: CI - Test de l'API
 # events but only for the master branch
 on:
   push:
-    branches: [main]
+    branches: [main, correction_ci_cd]
   pull_request:
     branches: [main]
 
@@ -52,19 +52,19 @@ jobs:
           sleep 2
 
       - name: Run Postman collections 1
-        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 2
-        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 3
-        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Run Postman collections 4
-        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme
         if: success() || failure()
 
       - name: Kill server
