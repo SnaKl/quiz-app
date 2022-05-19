@@ -4,7 +4,7 @@ name: CI - Test de l'API
 # events but only for the master branch
 on:
   push:
-    branches: [main, correction_ci_cd]
+    branches: [main, test_reporters_ci_cd]
   pull_request:
     branches: [main]
 
@@ -41,7 +41,7 @@ jobs:
       - name: Install Newman dependency
         run: |
           npm install -g newman
-          npm install -g newman-reporter-htmlextra
+          npm install -g newman-reporter-junitfull
 
       - name: Make Directory for results
         run: mkdir -p testResults
@@ -52,29 +52,30 @@ jobs:
           sleep 2
 
       - name: Run Postman collections 1
-        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport1.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections1.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-1.xml'
         if: success() || failure()
 
       - name: Run Postman collections 2
-        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport2.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections2.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-2.xml'
         if: success() || failure()
 
       - name: Run Postman collections 3
-        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport3.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections3.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-3.xml'
         if: success() || failure()
 
       - name: Run Postman collections 4
-        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r htmlextra --reporter-htmlextra-export testResults/htmlreport4.html --reporter-htmlextra-darkTheme
+        run: newman run quiz-api/tests/postman/Collections4.json -e quiz-api/tests/postman/Environment.json --export-environment quiz-api/tests/postman/Environment.json --insecure -r junitfull --reporter-junitfull-export 'testResults/jest-4.xml'
         if: success() || failure()
 
       - name: Kill server
         run: kill -9 `lsof -i:5000 -t`
         if: success() || failure()
 
-      # Upload the contents of Test Results directory to workspace
-      - name: Output the run Details
-        uses: actions/upload-artifact@v2
-        if: success() || failure()
+      # Make a reports of the tests
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
         with:
-          name: RunReports
-          path: testResults
+          name: Newman Tests            # Name of the check run which will be created
+          path: testResults/jest-*.xml    # Path to test results
+          reporter: java-junit        # Format of test results
