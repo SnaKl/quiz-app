@@ -14,7 +14,7 @@ module.exports = {
   },
   rules: {
     'comma-dangle': 'nerver',
-    'no-console': 'off',
+    'no-console': ['error', { allow: ['warn'] }],
     quotes: 'single'
   }
 };
