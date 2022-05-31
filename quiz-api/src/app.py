@@ -9,7 +9,7 @@ from model.Question import Question
 from utils import getRequest, secured_endpoint
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/')
 def hello_world():
@@ -92,4 +92,3 @@ def deleteParticipations():
 
 if __name__ == "__main__":
     app.run()
-    CORS(app)
