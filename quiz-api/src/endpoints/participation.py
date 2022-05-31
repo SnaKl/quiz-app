@@ -29,12 +29,12 @@ def createParticipation():
     for i, answer in enumerate(participationJSON["answers"]):
         if questions[i].possibleAnswers[answer - 1].isCorrect:
             participation.score += 1
-    
 
-    #on insert en bdd
+    # on insert en bdd
     sendRequest(participation.insertSQL())
     return participation.toJSON(), 200
-    
+
+
 def deleteAllParticipations():
     sendRequest(Participation.deleteAllSQL())
     return {"status": "OK"}, 204

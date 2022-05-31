@@ -23,6 +23,8 @@ def insertQuestion(questionList: list, questionToAdd: Question):
 """
 Fonction utilitaire pour supprimer une question d'une liste, et réindexer le tout
 """
+
+
 def popQuestion(questionList: list, indexToRemove: int):
     questionList.pop(indexToRemove)
     for i, question in enumerate(questionList):
@@ -111,7 +113,8 @@ def updateQuestion(pos):
         questions = popQuestion(questions, question.position - 1)
         questions = insertQuestion(questions, newQuestion)
 
-        questions = questions if newQuestion.position > question.position else questions[::-1]
+        questions = questions if newQuestion.position > question.position else questions[
+            ::-1]
         for q in questions:
             if q.position != newQuestion.position:
                 sendRequest(q.updateSQL())
