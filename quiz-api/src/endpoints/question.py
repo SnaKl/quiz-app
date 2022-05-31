@@ -1,3 +1,4 @@
+import json
 from flask import request
 from model.Answer import Answer
 from model.Question import Question
@@ -22,7 +23,6 @@ def insertQuestion(questionList: list, questionToAdd: Question):
 """
 Fonction utilitaire pour supprimer une question d'une liste, et réindexer le tout
 """
-
 
 def popQuestion(questionList: list, indexToRemove: int):
     questionList.pop(indexToRemove)
@@ -155,3 +155,16 @@ def deleteQuestion(pos):
         sendRequest(q.updateSQL())
 
     return {}, 204
+
+def getAllQuestion():
+    questions = getRequest(Question.getAllQuestionsSQL())
+    questions = list(map(lambda row: Question.fromSQLResponse(row), questions))
+    questions.sort(key=lambda q: q.position)
+
+    for question in questions:
+        # On fetch les réponses
+        answers = getRequest(question.fetchPossibleAnswersSQL())
+        answers = list(map(Answer.fromSQLResponse, answers))
+        question.setPossibleAnswers(answers)
+    
+    return json.dumps(questions, default=lambda o: o.__dict__, indent=2), 200

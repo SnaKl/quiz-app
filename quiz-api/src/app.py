@@ -3,7 +3,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from endpoints.participation import createParticipation, deleteAllParticipations
 import jwt_utils as jwtu
-from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion
+from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion, getAllQuestion
 from model.Participation import Participation
 from model.Question import Question
 from utils import getRequest, secured_endpoint
@@ -50,6 +50,9 @@ def login():
 SECTION QUESTIONS
 """
 
+@app.route('/questions', methods=['GET'])
+def get_all_question():
+    return getAllQuestion()
 
 @app.route('/questions/<pos>', methods=['GET'])
 def get_question(pos):
