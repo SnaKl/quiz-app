@@ -1,17 +1,17 @@
 export default {
   clear() {
-		// todo : implement
+    // todo : implement
   },
   savePlayerName(playerName) {
-		window.localStorage.setItem("playerName", playerName);
+    window.localStorage.setItem('playerName', playerName);
   },
-  getPlayerName() {		
-		return window.localStorage.getItem("playerName");
+  getPlayerName() {
+    return window.localStorage.getItem('playerName');
   },
-  saveParticipationScore(participationScore) {
-		// todo : implement
+  saveToken(token) {
+    window.localStorage.setItem('token', token);
   },
-  getParticipationScore() {
-		// todo : implement
+  getToken() {
+    return window.localStorage.getItem('token');
   }
 };

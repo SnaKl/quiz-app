@@ -2,6 +2,7 @@
   <h1>Home page</h1>
 
   <router-link to="/start-new-quiz-page">Démarrer le quiz !</router-link>
+  <router-link to="/admin">ADMIN</router-link>
 
   <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date">
     {{ scoreEntry.playerName }} - {{ scoreEntry.score }}
@@ -9,18 +10,12 @@
 </template>
 
 <script>
-
-import quizApiService from "@/services/QuizApiService";
-
 export default {
-  name: "HomePage",
+  name: 'HomePage',
   data() {
     return {
-      registeredScores : []
+      registeredScores: []
     };
-  },
-  async created() {
-    console.log("Composant Home page 'created'");
-  },
+  }
 };
 </script>
