@@ -10,6 +10,15 @@
     "prettier-format": "prettier --config .prettierrc --write ./**/*.{js,vue,css,json}",
     "prepare": "cd .. & husky install"
   },
+  "lint-staged": {
+    "*.{vue,js,jsx,cjs,mjs}": [
+      "prettier --config .prettierrc --write",
+      "eslint --fix"
+    ],
+    "*.{html,css,less,ejs}": [
+      "prettier --config .prettierrc --write"
+    ]
+  },
   "dependencies": {
     "axios": "^0.27.2",
     "vue": "^3.2.33",
@@ -28,21 +37,5 @@
     "prettier": "^2.5.1",
     "vite": "^2.9.5",
     "vitest": "^0.9.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{vue,js,jsx,cjs,mjs}": [
-      "prettier --config .prettierrc --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{html,css,less,ejs}": [
-      "prettier --config .prettierrc --write",
-      "git add"
-    ]
   }
 }

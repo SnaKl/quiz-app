@@ -13,8 +13,8 @@ module.exports = {
     'vue/setup-compiler-macros': true
   },
   rules: {
-    'comma-dangle': 'nerver',
+    'comma-dangle': ['error', 'never'],
     'no-console': ['error', { allow: ['warn'] }],
-    quotes: 'single'
+    quotes: ['error', 'single', { avoidEscape: true }]
   }
 };
