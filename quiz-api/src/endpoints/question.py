@@ -1,4 +1,3 @@
-from turtle import position
 from flask import request
 from model.Answer import Answer
 from model.Question import Question
