@@ -10,7 +10,7 @@
 
 <script>
 
-import quizApiService from "@/services/quizApiService";
+import quizApiService from "@/services/QuizApiService";
 
 export default {
   name: "HomePage",
