@@ -8,6 +8,12 @@ export default {
   getPlayerName() {
     return window.localStorage.getItem('playerName');
   },
+  saveScore(score) {
+    window.localStorage.setItem('participationScore', score);
+  },
+  getScore() {
+    return window.localStorage.getItem('participationScore');
+  },
   saveToken(token) {
     window.localStorage.setItem('token', token);
   },

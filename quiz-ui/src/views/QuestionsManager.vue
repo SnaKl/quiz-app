@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import QuestionDisplay from '../components/QuestionDisplay.vue';
-import QuizApiService from '../services/QuizApiService';
+import participationStorageService from '@/services/ParticipationStorageService';
+import QuestionDisplay from '@/components/QuestionDisplay.vue';
+import QuizApiService from '@/services/QuizApiService';
 export default {
   name: 'QuestionManager',
   components: {
@@ -56,7 +57,14 @@ export default {
         this.loadQuestionByPosition();
       }
     },
-    async endQuiz() {}
+    async endQuiz() {
+      const { data } = await QuizApiService.call('post', '/participations', {
+        playerName: participationStorageService.getPlayerName(),
+        answers: this.selectedAnswers
+      });
+      participationStorageService.saveScore(data.score);
+      this.$router.push('/home');
+    }
   }
 };
 </script>
