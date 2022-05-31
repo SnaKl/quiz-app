@@ -8,7 +8,7 @@
     "test:unit": "vitest --environment jsdom",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "prettier-format": "prettier --config .prettierrc --write ./**/*.{js,vue,css,json}",
-    "prepare": "husky install"
+    "prepare": "cd .. & husky install"
   },
   "dependencies": {
     "axios": "^0.27.2",
