@@ -1,5 +1,6 @@
 from urllib.request import Request
 from flask import Flask, request
+from flask_cors import CORS
 from endpoints.participation import createParticipation, deleteAllParticipations
 import jwt_utils as jwtu
 from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion
@@ -91,3 +92,4 @@ def deleteParticipations():
 
 if __name__ == "__main__":
     app.run()
+    CORS(app)
