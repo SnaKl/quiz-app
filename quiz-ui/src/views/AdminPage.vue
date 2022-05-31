@@ -40,6 +40,7 @@ export default {
 
         //on stocke le token dans le cache
         participationStorageService.saveToken(token);
+        this.$router.push('/admin/questions');
       } catch (e) {
         alert('Mot de passe incorrect');
       }
