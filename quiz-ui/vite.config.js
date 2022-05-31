@@ -1,13 +1,13 @@
-import { fileURLToPath, URL } from 'url'
+import { fileURLToPath, URL } from 'url';
 
-import { defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig, loadEnv } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 
 export default ({ mode }) => {
   // eslint-disable-next-line no-undef
-  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
     plugins: [vue()],
@@ -22,4 +22,4 @@ export default ({ mode }) => {
       emptyOutDir: true
     }
   });
-}
+};
