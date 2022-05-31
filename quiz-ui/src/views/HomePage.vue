@@ -1,11 +1,10 @@
 <template>
-  <h1>Home page</h1>
-
-  <router-link to="/start-new-quiz-page">Démarrer le quiz !</router-link>
-  <router-link to="/admin">ADMIN</router-link>
-
-  <div v-for="scoreEntry in registeredScores" v-bind:key="scoreEntry.date">
-    {{ scoreEntry.playerName }} - {{ scoreEntry.score }}
+  <div id="homeContainer">
+    <h1>Home page</h1>
+    <router-link to="/start-new-quiz-page" id="title"
+      >Démarrer le quiz !</router-link
+    >
+    <router-link to="/admin" id="bottomLink">Admin panel</router-link>
   </div>
 </template>
 
@@ -19,3 +18,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#homeContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
