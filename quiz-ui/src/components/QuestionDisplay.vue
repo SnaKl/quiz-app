@@ -30,7 +30,10 @@ export default {
 
 <style scoped>
 #QuestionContainer {
+  height: 100%;
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -38,7 +41,7 @@ img {
   border-radius: 20px;
   border: 5px solid black;
   width: auto;
-  max-height: 30%;
+  max-height: 30vh;
 }
 
 #AnswersContainer {

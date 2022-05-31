@@ -1,5 +1,5 @@
 <template>
-  <div id="QuestionContainer">
+  <div id="QuestionManagerContainer">
     <h1
       v-if="
         currentQuestion && currentQuestion.position == currentQuestionPosition
@@ -69,8 +69,8 @@ export default {
 };
 </script>
 
-<style>
-#QuestionContainer {
+<style scoped>
+#QuestionManagerContainer {
   height: 100%;
   display: flex;
   align-items: center;
