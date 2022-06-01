@@ -1,8 +1,8 @@
 import json
 from flask import request
-from model.Answer import Answer
-from model.Question import Question
-from utils import getRequest, sendRequest
+from src.model.Answer import Answer
+from src.model.Question import Question
+from src.utils import getRequest, sendRequest
 
 """
 Fonction utilitaire pour update une liste de questions en y ajoutant une question et en faisant les update

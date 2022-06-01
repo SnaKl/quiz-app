@@ -1,6 +1,6 @@
 import json
 
-from model.Answer import Answer
+from src.model.Answer import Answer
 
 
 class Question():

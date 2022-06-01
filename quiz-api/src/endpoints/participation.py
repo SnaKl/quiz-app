@@ -1,8 +1,8 @@
 from flask import request
-from model.Answer import Answer
-from model.Participation import Participation
-from model.Question import Question
-from utils import getRequest, sendRequest
+from src.model.Answer import Answer
+from src.model.Participation import Participation
+from src.model.Question import Question
+from src.utils import getRequest, sendRequest
 
 
 def createParticipation():

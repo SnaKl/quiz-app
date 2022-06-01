@@ -3,7 +3,7 @@ from functools import wraps
 import sqlite3
 from flask import jsonify, make_response, request
 import jwt
-from jwt_utils import JwtError, decode_token
+from src.jwt_utils import JwtError, decode_token
 from os.path import exists
 
 initialized = exists("db/db.db")

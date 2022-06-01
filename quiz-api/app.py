@@ -1,12 +1,12 @@
 from urllib.request import Request
 from flask import Flask, request
 from flask_cors import CORS
-from endpoints.participation import createParticipation, deleteAllParticipations
-import jwt_utils as jwtu
-from endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion, getAllQuestion
-from model.Participation import Participation
-from model.Question import Question
-from utils import getRequest, secured_endpoint
+from src.endpoints.participation import createParticipation, deleteAllParticipations
+import src.jwt_utils as jwtu
+from src.endpoints.question import createQuestion, deleteQuestion, getQuestion, updateQuestion, getAllQuestion
+from src.model.Participation import Participation
+from src.model.Question import Question
+from src.utils import getRequest, secured_endpoint
 
 app = Flask(__name__)
 CORS(app)
