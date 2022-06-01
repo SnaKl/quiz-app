@@ -63,7 +63,7 @@ export default {
         answers: this.selectedAnswers
       });
       participationStorageService.saveScore(data.score);
-      this.$router.push('/home');
+      this.$router.push('/score');
     }
   }
 };

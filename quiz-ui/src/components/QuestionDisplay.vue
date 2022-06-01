@@ -4,14 +4,14 @@
     <p>{{ question.text }}</p>
     <img v-if="question.image" :src="question.image" />
     <div id="AnswersContainer">
-      <a
+      <div
         v-for="(answer, index) in question?.possibleAnswers"
         @click="$emit('answer-selected', index + 1)"
         v-bind:key="index"
-        class="Answer"
+        :class="`Answer alert alert-${possibleQuizzClasses[index]}`"
       >
-        {{ answer.text }}
-      </a>
+        <p class="text-center">{{ answer.text }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +24,19 @@ export default {
       type: Object
     }
   },
-  emits: ['answer-selected']
+  emits: ['answer-selected'],
+  data() {
+    return {
+      possibleQuizzClasses: [
+        'primary',
+        'warning',
+        'success',
+        'danger',
+        'secondary',
+        'info'
+      ]
+    };
+  }
 };
 </script>
 
@@ -51,10 +63,7 @@ img {
 }
 
 .Answer {
-  border: 2px solid black;
-  border-radius: 5px;
   margin: 10px;
-  padding: 10px;
   width: 40%;
 }
 </style>
