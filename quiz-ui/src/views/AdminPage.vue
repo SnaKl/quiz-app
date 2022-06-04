@@ -1,13 +1,16 @@
 <template>
-  <h1>Admin page</h1>
-  <form id="admin-log-form">
-    <label for="admin-log-form-password">Mot de passe: </label>
-    <input
-      id="admin-log-form-password"
-      v-model="password"
-      type="password"
-      class="form-control w-50 my-3"
-    />
+  <h1 class="m-2">Admin page</h1>
+  <form id="admin-log-form" class="m-2">
+    <div class="form-floating">
+      <input
+        id="adminPassword"
+        type="password"
+        class="form-control mb-3"
+        placeholder="Mot de passe"
+        v-model="password"
+      />
+      <label for="adminPassword">Mot de passe admin :</label>
+    </div>
     <button class="btn btn-outline-primary" type="button" @click="logAdmin">
       Connexion
     </button>
