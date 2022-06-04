@@ -1,6 +1,12 @@
 <template>
   <h1>Admin page</h1>
   <h2>Liste des questions</h2>
+  <button
+    class="btn btn-primary"
+    @click="() => this.$router.push('/admin/questions/add')"
+  >
+    Ajouter une question
+  </button>
   <table class="table" v-if="questions">
     <thead class="thead-dark">
       <tr>

@@ -12,6 +12,7 @@
         currentQuestion && currentQuestion.position == currentQuestionPosition
       "
       :question="currentQuestion"
+      :edit="false"
       @answer-selected="answerClickedHandler"
     />
     <p v-else>Loading ...</p>

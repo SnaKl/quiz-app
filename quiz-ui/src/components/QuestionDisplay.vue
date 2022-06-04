@@ -1,32 +1,105 @@
 <template>
   <div id="QuestionContainer">
-    <h2>{{ question.title }}</h2>
-    <p>{{ question.text }}</p>
-    <img v-if="question.image" :src="question.image" />
+    <!-- TITRE DE LA QUESTION -->
+    <h2 v-if="!edit">{{ question.title }}</h2>
+    <input
+      v-else
+      type="text"
+      class="form-control"
+      v-model="editedQuestion.title"
+      placeholder="Titre de la question"
+    />
+
+    <!-- ENONCE DE LA QUESTION -->
+    <p v-if="!edit">{{ question.text }}</p>
+    <input
+      v-else
+      type="text"
+      class="form-control"
+      v-model="editedQuestion.text"
+      placeholder="Contenu de la question"
+    />
+
+    <!-- IMAGE DE LA QUESTION -->
+    <img v-if="!edit" class="display-img" :src="question.image" />
+    <div v-else class="fileDeposit" @click="() => $refs.file.click()">
+      <p v-if="!editedQuestion.image">Déposer un fichier...</p>
+      <img v-else :src="editedQuestion.image" class="preview-img" />
+      <!-- Input caché, permet de gérer le fichier passé en paramètre -->
+      <input
+        ref="file"
+        type="file"
+        style="display: none"
+        accept="image/png, image/jpeg"
+        @change="handleFileInput()"
+      />
+    </div>
+
+    <!-- REPONSES DE LA QUESTION -->
     <div id="AnswersContainer">
       <div
-        v-for="(answer, index) in question?.possibleAnswers"
+        v-for="(answer, index) in question != undefined
+          ? question.possibleAnswers
+          : editedQuestion.possibleAnswers"
         @click="$emit('answer-selected', index + 1)"
         v-bind:key="index"
         :class="`Answer alert alert-${possibleQuizzClasses[index]}`"
       >
-        <p class="text-center">{{ answer.text }}</p>
+        <p v-if="!edit" class="text-center">{{ answer.text }}</p>
+        <div v-else>
+          <input
+            type="text"
+            class="form-control"
+            v-model="editedQuestion.possibleAnswers[index].text"
+            placeholder="Réponse"
+          />
+          <input
+            type="checkbox"
+            v-model="editedQuestion.possibleAnswers[index].isCorrect"
+          />
+        </div>
       </div>
     </div>
+
+    <!-- SEULEMENT POUR L'EDITION, POSITION DE LA QUESTION -->
+    <input
+      v-if="edit"
+      type="number"
+      class="form-control"
+      placeholder="position"
+      v-model="editedQuestion.position"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'QuestionManager',
+  name: 'QuestionDisplay',
   props: {
     question: {
-      type: Object
+      type: Object,
+      required: false
+    },
+    edit: {
+      type: Boolean,
+      required: false
     }
   },
   emits: ['answer-selected'],
   data() {
     return {
+      editedQuestion: {
+        image: '',
+        position: 0,
+        title: '',
+        text: '',
+        possibleAnswers: [
+          { text: '', isCorrect: false },
+          { text: '', isCorrect: false },
+          { text: '', isCorrect: false },
+          { text: '', isCorrect: false }
+        ]
+      },
       possibleQuizzClasses: [
         'primary',
         'warning',
@@ -36,6 +109,15 @@ export default {
         'info'
       ]
     };
+  },
+  methods: {
+    handleFileInput() {
+      //Récuprèe le fichier de l'input et le transforme en URL base64
+      const file = this.$refs.file.files[0];
+      const reader = new FileReader();
+      reader.onload = () => (this.editedQuestion.image = reader.result);
+      reader.readAsDataURL(file);
+    }
   }
 };
 </script>
@@ -49,11 +131,26 @@ export default {
   justify-content: center;
 }
 
-img {
+.display-img {
   border-radius: 20px;
   border: 5px solid black;
   width: auto;
   max-height: 30vh;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+}
+
+.fileDeposit {
+  border-radius: 20px;
+  border: 5px dashed black;
+  width: 30vw;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #AnswersContainer {

@@ -4,6 +4,7 @@ import NewQuizPage from '../views/NewQuizPage.vue';
 import QuestionsManager from '../views/QuestionsManager.vue';
 import AdminPage from '../views/AdminPage.vue';
 import AdminPageQuestions from '../views/AdminPageQuestions.vue';
+import AdminPageQuestionEdition from '../views/AdminPageQuestionEdition.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,16 @@ const router = createRouter({
       path: '/admin/questions',
       name: 'AdminPageQuestions',
       component: AdminPageQuestions
+    },
+    {
+      path: '/admin/questions/add',
+      name: 'AdminPageQuestionEdition',
+      component: AdminPageQuestionEdition
+    },
+    {
+      path: '/admin/questions/:pos',
+      name: 'AdminPageQuestionEdition',
+      component: AdminPageQuestionEdition
     },
     {
       path: '/about',
