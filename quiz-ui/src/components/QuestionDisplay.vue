@@ -118,6 +118,11 @@ export default {
       reader.onload = () => (this.editedQuestion.image = reader.result);
       reader.readAsDataURL(file);
     }
+  },
+  created() {
+    if (this.edit && this.question) {
+      this.editedQuestion = this.question;
+    }
   }
 };
 </script>

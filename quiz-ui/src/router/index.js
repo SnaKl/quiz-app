@@ -36,7 +36,7 @@ const router = createRouter({
     },
     {
       path: '/admin/questions/add',
-      name: 'AdminPageQuestionEdition',
+      name: 'AdminPageQuestionCreation',
       component: AdminPageQuestionEdition
     },
     {
