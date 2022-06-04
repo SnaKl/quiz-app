@@ -1,12 +1,16 @@
 <template>
-  <h1>Admin page</h1>
-  <h2>Liste des questions</h2>
-  <button
-    class="btn btn-primary"
-    @click="() => this.$router.push('/admin/questions/add')"
-  >
-    Ajouter une question
-  </button>
+  <div class="adminHeader">
+    <div>
+      <h1>Admin page</h1>
+      <h2>Liste des questions</h2>
+    </div>
+    <button
+      class="btn btn-primary addQuestionButton"
+      @click="() => this.$router.push('/admin/questions/add')"
+    >
+      Ajouter une question
+    </button>
+  </div>
   <table class="table" v-if="questions">
     <thead class="thead-dark">
       <tr>
@@ -66,3 +70,12 @@ export default {
   }
 };
 </script>
+
+<style>
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+</style>
