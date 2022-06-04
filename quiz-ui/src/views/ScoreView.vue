@@ -40,13 +40,6 @@ export default {
       <p>Votre nom d'utilisateur: {{ name }}</p>
       <p>Votre score: {{ personalScore }}</p>
       <p>Votre position: {{ position }}</p>
-
-      <h1>Best scores</h1>
-      <ul>
-        <li v-for="(score, index) in scores" :key="index">
-          Name: {{ score.playerName }}, Score: {{ score.score }}
-        </li>
-      </ul>
     </div>
     <div v-else>
       <p>Vous n'avez pas encore lancé de quiz</p>
@@ -54,6 +47,12 @@ export default {
         <button>Démarrer le quiz !</button>
       </router-link>
     </div>
+    <h1>Best scores</h1>
+    <ul>
+      <li v-for="(score, index) in scores" :key="index">
+        Name: {{ score.playerName }}, Score: {{ score.score }}
+      </li>
+    </ul>
   </div>
 </template>
 
