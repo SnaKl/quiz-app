@@ -1,18 +1,30 @@
 <template>
-  <h1>Admin page</h1>
-  <h2>Edition de question</h2>
+  <div class="adminHeader">
+    <div>
+      <h1>Admin page</h1>
+      <h2>Edition de question</h2>
+    </div>
+
+    <div>
+      <button
+        class="btn btn-danger mx-2"
+        @click="() => $router.push('/admin/questions')"
+      >
+        Cancel
+      </button>
+      <button class="btn btn-primary" @click="saveQuestion">
+        Save question
+      </button>
+    </div>
+  </div>
+
   <div v-if="!existingQuestion || question">
-    <button
-      v-if="!existingQuestion"
-      class="btn btn-primary"
-      @click="saveQuestion"
-    >
-      Add question
-    </button>
-    <button v-else class="btn btn-warning" @click="saveQuestion">
-      Edit question
-    </button>
-    <QuestionDisplay :edit="true" ref="question" :question="question" />
+    <QuestionDisplay
+      :edit="true"
+      ref="question"
+      :nb-of-question="nbOfQuestion"
+      :question="question"
+    />
   </div>
 </template>
 
@@ -44,13 +56,18 @@ export default {
         `/questions/${this.$route.params.pos}`
       );
       this.question = data;
+    },
+    async fetchQuizInfo() {
+      const { data } = await QuizApiService.call('get', '/quiz-info');
+      this.nbOfQuestion = data.size;
     }
   },
   data() {
     return {
       /** Indique si on est en mode édition ou en mode création  */
       existingQuestion: false,
-      question: undefined
+      question: undefined,
+      nbOfQuestion: undefined
     };
   },
   components: {
@@ -60,7 +77,17 @@ export default {
     if (this.$route.params.pos) {
       this.existingQuestion = true;
       await this.fetchQuestion();
+      await this.fetchQuizInfo();
     }
   }
 };
 </script>
+
+<style>
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+</style>
