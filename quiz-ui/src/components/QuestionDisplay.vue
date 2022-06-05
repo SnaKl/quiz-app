@@ -75,7 +75,8 @@
           <input
             type="checkbox"
             class="form-check-input"
-            v-model="editedQuestion.possibleAnswers[index].isCorrect"
+            @change="handleAnswerChange(index)"
+            :checked="editedQuestion.possibleAnswers[index].isCorrect"
           />
         </div>
       </div>
@@ -137,6 +138,13 @@ export default {
       const reader = new FileReader();
       reader.onload = () => (this.editedQuestion.image = reader.result);
       reader.readAsDataURL(file);
+    },
+    handleAnswerChange(pos) {
+      const currentState = this.editedQuestion.possibleAnswers[pos].isCorrect;
+      for (let i = 0; i < this.editedQuestion.possibleAnswers.length; i++) {
+        this.editedQuestion.possibleAnswers[i].isCorrect = false;
+      }
+      this.editedQuestion.possibleAnswers[pos].isCorrect = !currentState;
     }
   },
   created() {
