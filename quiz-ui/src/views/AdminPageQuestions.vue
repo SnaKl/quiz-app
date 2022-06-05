@@ -16,8 +16,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col">View Question</th>
       </tr>
     </thead>
     <tbody>
@@ -25,10 +24,9 @@
         <th scope="row">{{ question.position }}</th>
         <td>{{ question.title }}</td>
         <td>
-          <a :href="'/admin/questions/' + question.position">Modifier</a>
-        </td>
-        <td>
-          <a @click="e => deleteQuestion(question.position)" href="#">Delete</a>
+          <a :href="'/admin/questions/' + question.position"
+            >Voir la question</a
+          >
         </td>
       </tr>
     </tbody>
@@ -50,16 +48,6 @@ export default {
     async fetchQuestions() {
       const { data } = await QuizApiService.call('get', '/questions');
       this.questions = data;
-    },
-    async deleteQuestion(pos) {
-      const token = ParticipationStorageService.getToken();
-      await QuizApiService.call(
-        'delete',
-        `/questions/${pos}`,
-        undefined,
-        token
-      );
-      await this.fetchQuestions();
     }
   },
   async created() {

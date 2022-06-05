@@ -58,7 +58,13 @@
         v-bind:key="index"
         :class="`Answer alert alert-${possibleQuizzClasses[index]}`"
       >
-        <p v-if="!edit" class="text-center">{{ answer.text }}</p>
+        <div v-if="!edit">
+          <p class="text-center">{{ answer.text }}</p>
+          <hr v-if="showAnswer && answer.isCorrect" />
+          <p v-if="showAnswer && answer.isCorrect" class="text-center">
+            <strong>Correct answer</strong>
+          </p>
+        </div>
         <div v-else class="AnswerEdition">
           <input
             type="text"
@@ -92,6 +98,10 @@ export default {
     /** Utile pour aider l'utilisateur à choisir une position de question */
     nbOfQuestion: {
       type: Number,
+      required: false
+    },
+    showAnswer: {
+      type: Boolean,
       required: false
     }
   },
@@ -139,7 +149,7 @@ export default {
 
 <style scoped>
 #QuestionContainer {
-  height: 100%;
+  height: 80vh;
   display: flex;
   align-items: center;
   flex-direction: column;
