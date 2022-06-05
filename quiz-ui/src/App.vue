@@ -9,7 +9,7 @@ import Toast from '@/components/ToastComponent.vue';
     <Navbar />
   </header>
 
-  <div id="mainContainer">
+  <div id="mainContainer" class="container my-auto">
     <RouterView />
   </div>
 
@@ -24,7 +24,7 @@ body {
   width: 100vw;
 }
 
-#mainContainer {
+/* #mainContainer {
   height: 100%;
-}
+} */
 </style>

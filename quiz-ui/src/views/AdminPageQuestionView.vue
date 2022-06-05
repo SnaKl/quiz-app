@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import QuestionDisplay from '../components/QuestionDisplay.vue';
-import QuizApiService from '../services/QuizApiService';
-import ParticipationStorageService from '../services/ParticipationStorageService';
+import QuestionDisplay from '@/components/QuestionDisplay.vue';
+import QuizApiService from '@/services/QuizApiService';
+import ParticipationStorageService from '@/services/ParticipationStorageService';
 
 export default {
   name: 'AdminPageQuestionView',

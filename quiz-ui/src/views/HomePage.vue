@@ -1,10 +1,15 @@
 <template>
   <div id="homeContainer">
     <h1>Home page</h1>
-    <router-link to="/start-new-quiz-page" id="title"
+    <router-link
+      to="/start-new-quiz-page"
+      id="title"
+      class="btn btn-lg btn-outline-primary"
       >Démarrer le quiz !</router-link
     >
-    <router-link to="/admin" id="bottomLink">Admin panel</router-link>
+    <router-link to="/admin" id="bottomLink" class="btn"
+      >Administration</router-link
+    >
   </div>
 </template>
 

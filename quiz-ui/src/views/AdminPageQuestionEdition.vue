@@ -30,8 +30,8 @@
 
 <script>
 import ParticipationStorageService from '@/services/ParticipationStorageService';
-import QuestionDisplay from '../components/QuestionDisplay.vue';
-import QuizApiService from '../services/QuizApiService';
+import QuestionDisplay from '@/components/QuestionDisplay.vue';
+import QuizApiService from '@/services/QuizApiService';
 
 export default {
   name: 'AdminPageQuestionEdition',

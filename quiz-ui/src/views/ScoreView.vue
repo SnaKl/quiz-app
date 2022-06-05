@@ -1,7 +1,7 @@
 <script>
 import participationStorageService from '@/services/ParticipationStorageService';
 import QuizApiService from '@/services/QuizApiService';
-import PodiumComponent from '../components/PodiumComponent.vue';
+import PodiumComponent from '@/components/PodiumComponent.vue';
 
 export default {
   data() {

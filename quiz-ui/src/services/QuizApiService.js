@@ -16,7 +16,6 @@ export default {
     }
 
     const onError = function (error) {
-      //TODO : ajouter le makeAToast()
       makeAToast(error.response.data.error);
       return Promise.reject(error.response || error.message);
     };

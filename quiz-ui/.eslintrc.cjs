@@ -16,5 +16,8 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-console': ['error', { allow: ['warn'] }],
     quotes: ['error', 'single', { avoidEscape: true }]
+  },
+  globals: {
+    bootstrap: 'readonly'
   }
 };
