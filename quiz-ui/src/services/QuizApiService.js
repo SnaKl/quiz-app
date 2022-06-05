@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { makeAToast } from '../utils/utils';
 
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}`,
@@ -15,6 +16,8 @@ export default {
     }
 
     const onError = function (error) {
+      //TODO : ajouter le makeAToast()
+      makeAToast(error.response.data.error);
       return Promise.reject(error.response || error.message);
     };
 

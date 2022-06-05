@@ -45,7 +45,7 @@ export default {
         participationStorageService.saveToken(token);
         this.$router.push('/admin/questions');
       } catch (e) {
-        alert('Mot de passe incorrect');
+        //exception gérée dans QuizApiService
       }
     }
   }
