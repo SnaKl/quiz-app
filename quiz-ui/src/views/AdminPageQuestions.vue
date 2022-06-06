@@ -28,9 +28,9 @@
         <th scope="row" class="text-end">{{ question.position }}</th>
         <td>{{ question.title }}</td>
         <td>
-          <a :href="'/admin/questions/' + question.position"
+          <RouterLink :to="'/admin/questions/' + question.position"
             ><I18nTextComponent i18n-key="viewQuestion"
-          /></a>
+          /></RouterLink>
         </td>
       </tr>
     </tbody>
@@ -41,6 +41,7 @@
 import ParticipationStorageService from '@/services/ParticipationStorageService';
 import QuizApiService from '@/services/QuizApiService';
 import I18nTextComponent from '@/components/I18nTextComponent.vue';
+import { RouterLink } from 'vue-router';
 
 export default {
   name: 'AdminPageQuestions',
@@ -64,7 +65,7 @@ export default {
 
     this.fetchQuestions();
   },
-  components: { I18nTextComponent }
+  components: { I18nTextComponent, RouterLink }
 };
 </script>
 
