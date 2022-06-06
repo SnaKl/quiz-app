@@ -1,6 +1,6 @@
 <!-- Login form for acessing the admin page ! -->
 <template>
-  <h1 class="m-2">Admin page</h1>
+  <h1 class="m-2"><I18nTextComponent i18n-key="adminPage" /></h1>
   <form id="admin-log-form" class="m-2">
     <div class="form-floating">
       <input
@@ -10,10 +10,12 @@
         placeholder="Mot de passe"
         v-model="password"
       />
-      <label for="adminPassword">Mot de passe admin :</label>
+      <label for="adminPassword"
+        ><I18nTextComponent i18n-key="adminPassword"
+      /></label>
     </div>
     <button class="btn btn-outline-primary" type="button" @click="logAdmin">
-      Connexion
+      <I18nTextComponent i18n-key="connect" />
     </button>
   </form>
 </template>
@@ -21,6 +23,7 @@
 <script>
 import QuizApiService from '@/services/QuizApiService';
 import participationStorageService from '@/services/ParticipationStorageService';
+import I18nTextComponent from '../components/I18nTextComponent.vue';
 
 export default {
   name: 'AdminPage',
@@ -29,6 +32,7 @@ export default {
       password: ''
     };
   },
+  components: { I18nTextComponent },
   methods: {
     async logAdmin() {
       //We directly get token from the data

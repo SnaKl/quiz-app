@@ -1,6 +1,7 @@
 <!-- Simple component used to create a new quizz and take the player name -->
 <script>
 import participationStorageService from '@/services/ParticipationStorageService';
+import I18nTextComponent from '../components/I18nTextComponent.vue';
 
 export default {
   name: 'NewQuizPage',
@@ -14,16 +15,19 @@ export default {
       participationStorageService.savePlayerName(this.username);
       this.$router.push('/questions'); //Router is already integrated, no need to import it
     }
-  }
+  },
+  components: { I18nTextComponent }
 };
 </script>
 
 <template>
   <div id="newQuizContainer">
-    <h1>Test New Quiz Page</h1>
+    <h1><I18nTextComponent i18n-key="newQuizTitle" /></h1>
     <form id="quiz-page-form" @submit="launchNewQuiz">
       <span style="display: inline-block">
-        <label for="quiz-page-form-username">Saisissez votre nom:</label>
+        <label for="quiz-page-form-username"
+          ><I18nTextComponent i18n-key="enterYourName"
+        /></label>
         <input
           type="text"
           v-model="username"
@@ -33,7 +37,9 @@ export default {
         />
       </span>
 
-      <button type="submit" class="btn btn-outline-danger">GO!</button>
+      <button type="submit" class="btn btn-outline-danger">
+        <I18nTextComponent i18n-key="goButton" />
+      </button>
     </form>
   </div>
 </template>

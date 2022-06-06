@@ -4,6 +4,7 @@
 import participationStorageService from '@/services/ParticipationStorageService';
 import QuizApiService from '@/services/QuizApiService';
 import PodiumComponent from '@/components/PodiumComponent.vue';
+import I18nTextComponent from '../components/I18nTextComponent.vue';
 
 export default {
   data() {
@@ -37,7 +38,7 @@ export default {
     }
     this.scores = data.scores.slice(0, 5);
   },
-  components: { PodiumComponent }
+  components: { PodiumComponent, I18nTextComponent }
 };
 </script>
 
@@ -49,13 +50,13 @@ export default {
       <h2>#{{ position }}</h2>
     </div>
     <div v-else>
-      <p>Vous n'avez pas encore lancé de quiz</p>
+      <p><I18nTextComponent i18n-key="noQuizLaunched" /></p>
       <router-link to="/start-new-quiz-page">
-        <button>Démarrer le quiz !</button>
+        <button><I18nTextComponent i18n-key="startQuiz" /></button>
       </router-link>
     </div>
     <div class="scoreBox">
-      <h1>Best scores</h1>
+      <h1><I18nTextComponent i18n-key="leaderBoard" /></h1>
       <PodiumComponent
         v-if="scores.length > 2"
         :firstName="scores[0].playerName"

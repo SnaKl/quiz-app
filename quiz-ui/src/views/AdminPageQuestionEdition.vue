@@ -2,8 +2,8 @@
 <template>
   <div class="adminHeader">
     <div>
-      <h1>Admin page</h1>
-      <h2>Edition de question</h2>
+      <h1><I18nTextComponent i18n-key="adminPage" /></h1>
+      <h2><I18nTextComponent i18n-key="questionEditing" /></h2>
     </div>
 
     <div>
@@ -11,10 +11,10 @@
         class="btn btn-danger mx-2"
         @click="() => $router.push('/admin/questions')"
       >
-        Cancel
+        <I18nTextComponent i18n-key="cancel" />
       </button>
       <button class="btn btn-primary" @click="saveQuestion">
-        Save question
+        <I18nTextComponent i18n-key="saveQuestion" />
       </button>
     </div>
   </div>
@@ -35,6 +35,7 @@
 import ParticipationStorageService from '@/services/ParticipationStorageService';
 import QuestionDisplay from '@/components/QuestionDisplay.vue';
 import QuizApiService from '@/services/QuizApiService';
+import I18nTextComponent from '../components/I18nTextComponent.vue';
 
 export default {
   name: 'AdminPageQuestionEdition',
@@ -79,7 +80,8 @@ export default {
     };
   },
   components: {
-    QuestionDisplay
+    QuestionDisplay,
+    I18nTextComponent
   },
   /** On creation, check if we are in edition mode (if we have the pos of the question to edit)
    * If true, we handle things such the fetch of this question
