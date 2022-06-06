@@ -11,6 +11,15 @@
         class="btn btn-lg btn-outline-primary mt-5"
         ><I18nTextComponent i18n-key="startQuiz"
       /></router-link>
+      <select
+        @change="handleLanguageChange"
+        :value="language"
+        class="form-select form-select-sm mt-3 mx-auto"
+        style="width: 10%"
+      >
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+      </select>
     </div>
   </div>
 </template>

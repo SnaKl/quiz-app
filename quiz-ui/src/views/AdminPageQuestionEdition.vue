@@ -12,7 +12,7 @@
         <i class="bi bi-arrow-left"></i> <I18nTextComponent i18n-key="cancel" />
       </button>
       <button class="btn btn-primary" @click="saveQuestion" type="button">
-        <i class="bi bi-save"></i> <I18nTextComponent i18n-key="save" />
+        <i class="bi bi-save"></i> <I18nTextComponent i18n-key="saveQuestion" />
       </button>
     </nav>
   </div>
