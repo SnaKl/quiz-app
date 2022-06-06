@@ -1,4 +1,4 @@
-<!-- gestion des erreurs -->
+<!-- Utility component, used to give feedback to the user when an error ocurr -->
 <template>
   <div class="toast-container position-absolute top-right">
     <div

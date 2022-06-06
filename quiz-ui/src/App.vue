@@ -1,3 +1,5 @@
+<!-- Root of the application -->
+
 <script setup>
 import { RouterView } from 'vue-router';
 import Navbar from '@/components/NavbarComponent.vue';

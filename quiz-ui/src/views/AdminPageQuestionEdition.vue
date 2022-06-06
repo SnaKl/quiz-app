@@ -1,3 +1,4 @@
+<!-- Component used to edit a question (in creation and edition mode) -->
 <template>
   <div class="adminHeader">
     <div>
@@ -18,6 +19,7 @@
     </div>
   </div>
 
+  <!-- Only show question when we have loaded it -->
   <div v-if="!existingQuestion || question">
     <QuestionDisplay
       :edit="true"
@@ -26,6 +28,7 @@
       :question="question"
     />
   </div>
+  <span v-else>Loading ...</span>
 </template>
 
 <script>
@@ -36,6 +39,7 @@ import QuizApiService from '@/services/QuizApiService';
 export default {
   name: 'AdminPageQuestionEdition',
   methods: {
+    /** Permit to create or edit a question (depend if the question was existing before) */
     async saveQuestion() {
       const token = ParticipationStorageService.getToken();
       const question = this.$refs.question.editedQuestion;
@@ -50,6 +54,7 @@ export default {
         );
       this.$router.push('/admin/questions');
     },
+    /** Used in edition mode, fetch the question to edit */
     async fetchQuestion() {
       const { data } = await QuizApiService.call(
         'get',
@@ -57,6 +62,7 @@ export default {
       );
       this.question = data;
     },
+    /** Fetch info about the quiz (used to get the total number of questions) */
     async fetchQuizInfo() {
       const { data } = await QuizApiService.call('get', '/quiz-info');
       this.nbOfQuestion = data.size;
@@ -64,21 +70,26 @@ export default {
   },
   data() {
     return {
-      /** Indique si on est en mode édition ou en mode création  */
+      /** Show if the question was existing before (if we are in edtion mode)  */
       existingQuestion: false,
+      /** Question to edit (and to pass to QuestionDisplay) */
       question: undefined,
+      /** Total amount of questions */
       nbOfQuestion: undefined
     };
   },
   components: {
     QuestionDisplay
   },
+  /** On creation, check if we are in edition mode (if we have the pos of the question to edit)
+   * If true, we handle things such the fetch of this question
+   */
   async created() {
     if (this.$route.params.pos) {
       this.existingQuestion = true;
       await this.fetchQuestion();
-      await this.fetchQuizInfo();
     }
+    await this.fetchQuizInfo();
   }
 };
 </script>

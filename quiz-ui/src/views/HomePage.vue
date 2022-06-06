@@ -1,3 +1,4 @@
+<!-- Home page of the application -->
 <template>
   <div id="homeContainer">
     <h1>Home page</h1>
@@ -15,12 +16,7 @@
 
 <script>
 export default {
-  name: 'HomePage',
-  data() {
-    return {
-      registeredScores: []
-    };
-  }
+  name: 'HomePage'
 };
 </script>
 

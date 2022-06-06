@@ -1,3 +1,4 @@
+<!-- Utility Component containing the main navBar of the application -->
 <script setup>
 import { RouterLink } from 'vue-router';
 </script>

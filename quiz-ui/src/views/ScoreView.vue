@@ -1,3 +1,5 @@
+<!-- Leaderboard view (with a nice podium) -->
+
 <script>
 import participationStorageService from '@/services/ParticipationStorageService';
 import QuizApiService from '@/services/QuizApiService';
@@ -6,14 +8,21 @@ import PodiumComponent from '@/components/PodiumComponent.vue';
 export default {
   data() {
     return {
+      /** Name of the player */
       name: null,
+      /** Score of the player */
       personalScore: 0,
+      /** Position of the player score, among other scores */
       position: 0,
+      /** Registered scores */
       scores: []
     };
   },
+  /** On creation, fetch other scores and compute the actual position of the player */
   async created() {
     const { data } = await QuizApiService.call('get', '/quiz-info');
+
+    //Get information of the player from localStorage
     const name = participationStorageService.getPlayerName();
     if (name) this.name = name;
     const score = participationStorageService.getScore();

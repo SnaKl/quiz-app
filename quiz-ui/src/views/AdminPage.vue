@@ -1,3 +1,4 @@
+<!-- Login form for acessing the admin page ! -->
 <template>
   <h1 class="m-2">Admin page</h1>
   <form id="admin-log-form" class="m-2">
@@ -30,22 +31,22 @@ export default {
   },
   methods: {
     async logAdmin() {
-      //on récupère le data sous le nom de token
-      //on transmet le mdp sous format d'objet JSON
+      //We directly get token from the data
       try {
         const {
           data: { token }
         } = await QuizApiService.call(
           'post',
           '/login',
+          //We transmit Object to JSON DATA
           JSON.stringify({ password: this.password })
         );
 
-        //on stocke le token dans le cache
+        //We store the token in localStorage
         participationStorageService.saveToken(token);
         this.$router.push('/admin/questions');
       } catch (e) {
-        //exception gérée dans QuizApiService
+        //Exception handled in a higher level (QuizApiService who will print an error toast)
       }
     }
   }

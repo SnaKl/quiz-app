@@ -1,3 +1,4 @@
+<!-- List of the question available on the Admin Panel (it's like the home page of the admin panel) -->
 <template>
   <div class="adminHeader">
     <div>
@@ -41,15 +42,18 @@ export default {
   name: 'AdminPageQuestions',
   data() {
     return {
+      /** Questions to display */
       questions: []
     };
   },
   methods: {
+    /** Fetch questions from a backend call (added method in the backend) */
     async fetchQuestions() {
       const { data } = await QuizApiService.call('get', '/questions');
       this.questions = data;
     }
   },
+  /** Check if the user is authorized to be here, and fetch the questions */
   async created() {
     const token = ParticipationStorageService.getToken();
     if (!token) this.$router.push('/questions');

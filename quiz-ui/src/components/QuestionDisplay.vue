@@ -1,6 +1,9 @@
+<!-- A more complex component, permit to display and edit a question -->
+<!-- We used the same component for edition and display since the layout of the two are similar -->
+
 <template>
   <div id="QuestionContainer">
-    <!-- SEULEMENT POUR L'EDITION, POSITION DE LA QUESTION -->
+    <!-- EDITION MODE ONLY, POSITION OF THE QUESTION -->
     <label for="position" v-if="edit">Position</label>
     <input
       v-if="edit"
@@ -13,7 +16,7 @@
       v-model="editedQuestion.position"
     />
 
-    <!-- TITRE DE LA QUESTION -->
+    <!-- TITLE OF THE QUESTION -->
     <h2 v-if="!edit">{{ question.title }}</h2>
     <input
       v-else
@@ -23,7 +26,7 @@
       placeholder="Titre de la question"
     />
 
-    <!-- ENONCE DE LA QUESTION -->
+    <!-- TEXT OF THE QUESTION -->
     <p v-if="!edit">{{ question.text }}</p>
     <input
       v-else
@@ -33,12 +36,12 @@
       placeholder="Contenu de la question"
     />
 
-    <!-- IMAGE DE LA QUESTION -->
+    <!-- QUESTION IMAGE -->
     <img v-if="!edit" class="display-img" :src="question.image" />
     <div v-else class="fileDeposit m-2" @click="() => $refs.file.click()">
       <p v-if="!editedQuestion.image">Déposer un fichier...</p>
       <img v-else :src="editedQuestion.image" class="preview-img" />
-      <!-- Input caché, permet de gérer le fichier passé en paramètre -->
+      <!-- Hidden input, used to handle img input -->
       <input
         ref="file"
         type="file"
@@ -48,7 +51,7 @@
       />
     </div>
 
-    <!-- REPONSES DE LA QUESTION -->
+    <!-- Answers of the question -->
     <div id="AnswersContainer">
       <div
         v-for="(answer, index) in question != undefined
@@ -60,6 +63,7 @@
       >
         <div v-if="!edit">
           <p class="text-center">{{ answer.text }}</p>
+          <!-- If we want to show the right answer, this text will be printed -->
           <hr v-if="showAnswer && answer.isCorrect" />
           <p v-if="showAnswer && answer.isCorrect" class="text-center">
             <strong>Correct answer</strong>
@@ -88,19 +92,24 @@
 export default {
   name: 'QuestionDisplay',
   props: {
+    /** Question to display, or, in edit mode, the question to edit.
+     * If no question is given, we will assume that we are in "creation mode" and create a new from scratch
+     */
     question: {
       type: Object,
       required: false
     },
+    /** If the question is in edit mode */
     edit: {
       type: Boolean,
       required: false
     },
-    /** Utile pour aider l'utilisateur à choisir une position de question */
+    /** Used in edit mode for helping the user to choose a position */
     nbOfQuestion: {
       type: Number,
       required: false
     },
+    /** Do we need to show the right answer */
     showAnswer: {
       type: Boolean,
       required: false
@@ -109,6 +118,7 @@ export default {
   emits: ['answer-selected'],
   data() {
     return {
+      /** Currently edited question */
       editedQuestion: {
         image: '',
         position: 1,
@@ -121,6 +131,7 @@ export default {
           { text: '', isCorrect: false }
         ]
       },
+      /** Used to set a different class (and color) to each answer (handle up to 6 answers) */
       possibleQuizzClasses: [
         'primary',
         'warning',
@@ -132,13 +143,14 @@ export default {
     };
   },
   methods: {
+    /** Method for handling the file upload, get the file from the input and convert it to Data URL (and set it in editedQuestion) */
     handleFileInput() {
-      //Récuprèe le fichier de l'input et le transforme en URL base64
       const file = this.$refs.file.files[0];
       const reader = new FileReader();
       reader.onload = () => (this.editedQuestion.image = reader.result);
       reader.readAsDataURL(file);
     },
+    /** Method for handling change of right answer, since there is only one good answer, we switch other to false when clicked */
     handleAnswerChange(pos) {
       const currentState = this.editedQuestion.possibleAnswers[pos].isCorrect;
       for (let i = 0; i < this.editedQuestion.possibleAnswers.length; i++) {
@@ -149,6 +161,7 @@ export default {
   },
   created() {
     if (this.edit && this.question) {
+      // We set the question to edit to be equal to the prop in edit mode
       this.editedQuestion = this.question;
     }
   }

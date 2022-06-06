@@ -1,3 +1,4 @@
+<!-- Simple component used to create a new quizz and take the player name -->
 <script>
 import participationStorageService from '@/services/ParticipationStorageService';
 
@@ -11,7 +12,7 @@ export default {
   methods: {
     launchNewQuiz() {
       participationStorageService.savePlayerName(this.username);
-      this.$router.push('/questions'); //router déjà pré-intégré, no import
+      this.$router.push('/questions'); //Router is already integrated, no need to import it
     }
   }
 };

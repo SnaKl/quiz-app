@@ -1,3 +1,4 @@
+<!-- Component used to display a question in Admin Panel -->
 <template>
   <div class="adminHeader">
     <div>
@@ -37,6 +38,7 @@ import ParticipationStorageService from '@/services/ParticipationStorageService'
 export default {
   name: 'AdminPageQuestionView',
   methods: {
+    /** Used to fecth the question from the position of the question (passed by a route parameter) */
     async fetchQuestion() {
       const { data } = await QuizApiService.call(
         'get',
@@ -44,6 +46,7 @@ export default {
       );
       this.question = data;
     },
+    /** Used to delete a question from the position of the question (passed by a route parameter) */
     async deleteQuestion() {
       const token = ParticipationStorageService.getToken();
       await QuizApiService.call(
@@ -57,12 +60,14 @@ export default {
   },
   data() {
     return {
+      /** Displayed Question */
       question: undefined
     };
   },
   components: {
     QuestionDisplay
   },
+  /** Fetch question on mount */
   async created() {
     if (this.$route.params.pos) {
       await this.fetchQuestion();

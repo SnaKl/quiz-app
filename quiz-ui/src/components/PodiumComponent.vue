@@ -1,9 +1,13 @@
+<!-- Simple component who display a podium for 3 names -->
 <script>
 export default {
   name: 'PodiumComponent',
   props: {
+    /** First Person in the leaderboard */
     firstName: String,
+    /** Second Person in the leaderboard */
     secondName: String,
+    /** Third Person in the leaderboard */
     thirdName: String
   }
 };

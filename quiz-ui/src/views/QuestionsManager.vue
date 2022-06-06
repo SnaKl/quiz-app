@@ -1,3 +1,5 @@
+<!-- Component to handle the flow of the quizz -->
+
 <template>
   <div id="QuestionManagerContainer">
     <h1
@@ -33,13 +35,18 @@ export default {
   },
   data() {
     return {
+      /** Currently displayed question */
       currentQuestion: null,
+      /** Currently displayed question position (start to 1) */
       currentQuestionPosition: 1,
+      /** Total number of questions (used for display) */
       totalNumberOfQuestion: null,
+      /** Currently selected answers by the player */
       selectedAnswers: []
     };
   },
   methods: {
+    /** Get question by using his position from the back end */
     async loadQuestionByPosition() {
       const { data: quizInfo } = await QuizApiService.call('get', '/quiz-info');
       this.totalNumberOfQuestion = quizInfo.size;
@@ -49,6 +56,7 @@ export default {
       );
       this.currentQuestion = data;
     },
+    /** Handle the answer of the player, and finish the quizz if its the last question */
     async answerClickedHandler(answerPosition) {
       this.selectedAnswers.push(answerPosition);
       this.currentQuestionPosition++;
@@ -58,6 +66,7 @@ export default {
         this.loadQuestionByPosition();
       }
     },
+    /** All the process at the end of the quizz */
     async endQuiz() {
       const { data } = await QuizApiService.call('post', '/participations', {
         playerName: participationStorageService.getPlayerName(),
