@@ -64,6 +64,15 @@ def createQuestion():
     if question.position <= 0 and question.position > len(questions) + 1:
         return {"error": f"Invalid Position, min=1 and max={len(questions) + 1}"}, 400
 
+    # On vérifie que il y a max une réponse dans la question
+    correctAnswerCount = 0
+    for answer in question.possibleAnswers:
+        if answer.isCorrect:
+            correctAnswerCount += 1
+        
+        if correctAnswerCount > 1:
+            return {"error": "There can only be one good answer"}, 400
+
     # On verifie si la position est dejà prise, si oui, on decalle
     if len(list(filter(lambda q: q.position == question.position, questions))) != 0:
         # On update les index
@@ -106,6 +115,15 @@ def updateQuestion(pos):
         # On vérifie si la nouvelle position est valide
         if newQuestion.position <= 0 and newQuestion.position > len(questions):
             return {"error": f"Invalid Position, min=1 and max={len(questions)}"}, 400
+        
+        # On vérifie que il y a max une réponse dans la question
+        correctAnswerCount = 0
+        for answer in newQuestion.possibleAnswers:
+            if answer.isCorrect:
+                correctAnswerCount += 1
+            
+            if correctAnswerCount > 1:
+                return {"error": "There can only be one good answer"}, 400
 
         # On update les positions
         questions.sort(key=lambda q: q.position)
