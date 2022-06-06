@@ -3,8 +3,8 @@
   <div id="homeContainer">
     <h1 class="my-5"><I18nTextComponent i18n-key="homePage" /></h1>
     <div class="text-center pt-5">
-      <h2 class="my-5">Bienvenue sur Quiz-App</h2>
-      <article>Testez vos connaissances sur la culture informatique !</article>
+      <h2 class="my-5"><I18nTextComponent i18n-key="welcome" /></h2>
+      <article><I18nTextComponent i18n-key="welcomeMsg" /></article>
       <router-link
         to="/start-new-quiz-page"
         id="title"

@@ -3,12 +3,9 @@
   <div class="about">
     <h1 class="my-5"><I18nTextComponent i18n-key="aboutPage" /></h1>
     <article>
-      Quiz-App est une application développée par une équipe de trois étudiants
-      jeunes et dynamiques. Passionés par l'informatique et plus
-      particulièrement le développement web. En effet, ces trois têtes brûlées
-      sont très friandes du PHP natif.
+      <I18nTextComponent i18n-key="aboutContent" />
       <hr class="my-5" />
-      <h3 class="mb-3">L'équipe</h3>
+      <h3 class="mb-3"><I18nTextComponent i18n-key="aboutTeamTitle" /></h3>
       <ul class="list-group w-25">
         <a
           class="list-group-item list-group-item-action align-items-center"
@@ -63,9 +60,8 @@
         </a>
       </ul>
       <hr class="my-5" />
-      <h3>Demande de contact</h3>
-      Nous n'acceptons malheureusement aucune demande de contact, merci de votre
-      compréhension.
+      <h3><I18nTextComponent i18n-key="aboutContactTitle" /></h3>
+      <I18nTextComponent i18n-key="aboutContact" />
     </article>
   </div>
 </template>

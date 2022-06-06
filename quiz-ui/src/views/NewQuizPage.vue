@@ -21,23 +21,24 @@ export default {
 </script>
 
 <template>
-  <h1 class="my-5"><I18nTextComponent i18n-key="newQuizTitle" /></h1>
+  <h1 class="my-5"><I18nTextComponent i18n-key="homePage" /></h1>
   <div class="text-center pt-5">
-    <h2 class="my-5">Nouveau quiz</h2>
+    <h2 class="my-5"><I18nTextComponent i18n-key="newQuizTitle" /></h2>
     <form id="quiz-page-form" @submit="launchNewQuiz">
       <label for="quiz-page-form-username"
-        ><label for="quiz-page-form-username">Saisissez votre nom</label></label
-      >
+        ><label for="quiz-page-form-username"
+          ><I18nTextComponent i18n-key="enterYourName" /></label
+      ></label>
       <div class="input-group w-25 mx-auto mt-3">
         <input
           type="text"
           v-model="username"
           class="form-control"
           id="quiz-page-form-username"
-          placeholder="Pseudonyme"
+          placeholder="ex: Pierre"
         />
         <button type="submit" class="btn btn-outline-danger">
-          <label for="quiz-page-form-username">Saisissez votre nom</label>
+          <label for="quiz-page-form-username">GO !</label>
         </button>
       </div>
     </form>

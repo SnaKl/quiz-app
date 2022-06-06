@@ -1,12 +1,36 @@
 /** Dictionary with all the string of the application */
 const i18nTranslation = {
   aboutPage: {
-    fr: 'Ceci est une page de renseignement',
-    en: 'This is an about page'
+    fr: 'À propos',
+    en: 'About'
+  },
+  aboutContent: {
+    fr: "Quiz-App est une application développée par une équipe de trois étudiants jeunes et dynamiques. Passionés par l'informatique et plus particulièrement le développement web. En effet, ces trois têtes brûlées sont très friandes du PHP natif.",
+    en: 'Quiz-App is an application developed by a team of three young and dynamic students. Passionated about IT et more specifically web development. Indeed, these three hotheaded students are fond of native PHP.'
+  },
+  aboutTeamTitle: {
+    fr: "L'équipe",
+    en: 'The team'
+  },
+  aboutContactTitle: {
+    fr: 'Demande de contact',
+    en: 'Contact request'
+  },
+  aboutContact: {
+    fr: "Nous n'acceptons malheureusement aucune demande de contact, merci de votre compréhension.",
+    en: 'We sadly do not accept contact requests, thank you for your comprehension.'
+  },
+  welcome: {
+    fr: 'Bienvenue sur Quiz-App',
+    en: 'Welcome on Quiz-App'
+  },
+  welcomeMsg: {
+    fr: 'Testez vos connaissances sur la culture informatique !',
+    en: 'Have a go on your IT knowledge !'
   },
   homePage: {
-    fr: "Page d'accueuil",
-    en: 'Home Page'
+    fr: 'Accueil',
+    en: 'Homepage'
   },
   startQuiz: {
     fr: 'Démarrer le quiz !',
@@ -17,12 +41,12 @@ const i18nTranslation = {
     en: 'Administration'
   },
   newQuizTitle: {
-    fr: 'Nouveau quiz !',
-    en: 'New Quiz !'
+    fr: 'Nouveau quiz',
+    en: 'New quiz'
   },
   enterYourName: {
-    fr: 'Saisissez votre nom :',
-    en: 'Enter your name :'
+    fr: 'Saisissez votre nom',
+    en: 'Enter your name'
   },
   goButton: {
     fr: "C'est parti !",
@@ -41,7 +65,7 @@ const i18nTranslation = {
     en: ' Home'
   },
   aboutLink: {
-    fr: ' A propos',
+    fr: ' À propos',
     en: ' About'
   },
   scoreLink: {
@@ -53,12 +77,12 @@ const i18nTranslation = {
     en: 'Admin Page'
   },
   adminPassword: {
-    fr: 'Mot de passe admin :',
-    en: 'Admin password :'
+    fr: 'Mot de passe admin',
+    en: 'Admin password'
   },
   connect: {
     fr: 'Connexion',
-    en: 'Connect'
+    en: 'Login'
   },
   error: {
     fr: 'Erreur',
@@ -66,11 +90,11 @@ const i18nTranslation = {
   },
   questionList: {
     fr: 'Liste des questions',
-    en: 'Question List'
+    en: 'Question list'
   },
   addQuestion: {
-    fr: 'Ajouter une question',
-    en: 'Add question'
+    fr: ' Ajouter une question',
+    en: ' Add question'
   },
   title: {
     fr: 'Titre',
@@ -78,11 +102,11 @@ const i18nTranslation = {
   },
   viewQuestion: {
     fr: 'Voir la question',
-    en: 'View Question'
+    en: 'View question'
   },
   questionEditing: {
     fr: 'Edition de question',
-    en: 'Question Editing'
+    en: 'Question editing'
   },
   cancel: {
     fr: 'Annuler',
@@ -93,16 +117,20 @@ const i18nTranslation = {
     en: 'Save question'
   },
   seeQuestion: {
-    fr: 'Visualisation de question',
-    en: 'See question'
+    fr: 'Vue de question',
+    en: 'Question display'
   },
   editQuestion: {
-    fr: 'Editer la question',
-    en: 'Edit question'
+    fr: ' Éditer la question',
+    en: ' Edit question'
   },
   delete: {
-    fr: 'Supprimer',
-    en: 'Delete'
+    fr: ' Supprimer',
+    en: ' Delete'
+  },
+  loading: {
+    fr: 'Chargement ...',
+    en: 'Loading ...'
   }
 };
 

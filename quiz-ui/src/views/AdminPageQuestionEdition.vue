@@ -25,7 +25,7 @@
       :question="question"
     />
   </div>
-  <span v-else>Chargement ...</span>
+  <span v-else><I18nTextComponent i18n-key="loading" /></span>
 </template>
 
 <script>
