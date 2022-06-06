@@ -9,7 +9,7 @@
       v-if="edit"
       id="position"
       type="number"
-      class="form-control m-2 w-25"
+      class="form-control m-2 w-50"
       placeholder="position"
       min="1"
       :max="nbOfQuestion ? nbOfQuestion + 1 : undefined"
@@ -21,7 +21,7 @@
     <input
       v-else
       type="text"
-      class="form-control w-25"
+      class="form-control w-50"
       v-model="editedQuestion.title"
       placeholder="Titre de la question"
     />
@@ -31,7 +31,7 @@
     <input
       v-else
       type="text"
-      class="form-control m-2 w-25"
+      class="form-control m-2 w-50"
       v-model="editedQuestion.text"
       placeholder="Contenu de la question"
     />
@@ -66,7 +66,7 @@
           <!-- If we want to show the right answer, this text will be printed -->
           <hr v-if="showAnswer && answer.isCorrect" />
           <p v-if="showAnswer && answer.isCorrect" class="text-center">
-            <strong>Correct answer</strong>
+            <strong>Réponse correcte</strong>
           </p>
         </div>
         <div v-else class="AnswerEdition">
@@ -170,7 +170,6 @@ export default {
 
 <style scoped>
 #QuestionContainer {
-  height: 80vh;
   display: flex;
   align-items: center;
   flex-direction: column;

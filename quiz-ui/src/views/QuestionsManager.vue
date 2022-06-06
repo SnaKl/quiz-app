@@ -17,7 +17,7 @@
       :edit="false"
       @answer-selected="answerClickedHandler"
     />
-    <p v-else>Loading ...</p>
+    <p v-else>Chargement ...</p>
   </div>
 </template>
 

@@ -1,32 +1,31 @@
 <!-- Component used to display a question in Admin Panel -->
 <template>
-  <div class="adminHeader">
-    <div>
-      <h1><I18nTextComponent i18n-key="adminPage" /></h1>
-      <h2><I18nTextComponent i18n-key="seeQuestion" /></h2>
-    </div>
-
-    <div>
+  <h1 class="my-5"><I18nTextComponent i18n-key="adminPage" /></h1>
+  <div class="d-flex justify-content-between">
+    <h2><I18nTextComponent i18n-key="seeQuestion" /></h2>
+    <nav>
       <button
-        class="btn btn-warning mx-2"
-        @click="() => $router.push('/admin/questions')"
+        class="btn btn-warning"
+        @click="() => $router.push(`/admin/questions/`)"
+        type="button"
       >
-        <I18nTextComponent i18n-key="cancel" />
+        <i class="bi bi-arrow-left"></i> <I18nTextComponent i18n-key="cancel" />
       </button>
-      <button class="btn btn-danger mx-2" @click="deleteQuestion">
-        <I18nTextComponent i18n-key="delete" />
+      <button class="btn btn-danger mx-2" @click="deleteQuestion" type="button">
+        <i class="bi bi-trash-fill"></i> <I18nTextComponent i18n-key="delete" />
       </button>
       <button
         class="btn btn-primary"
         @click="
           () => $router.push(`/admin/questions/${$route.params.pos}/edit`)
         "
+        type="button"
       >
+        <i class="bi bi-pencil-fill"></i>
         <I18nTextComponent i18n-key="editQuestion" />
       </button>
-    </div>
+    </nav>
   </div>
-
   <QuestionDisplay v-if="question" :question="question" show-answer />
 </template>
 
@@ -34,7 +33,7 @@
 import QuestionDisplay from '@/components/QuestionDisplay.vue';
 import QuizApiService from '@/services/QuizApiService';
 import ParticipationStorageService from '@/services/ParticipationStorageService';
-import I18nTextComponent from '../components/I18nTextComponent.vue';
+import I18nTextComponent from '@/components/I18nTextComponent.vue';
 
 export default {
   name: 'AdminPageQuestionView',
@@ -77,12 +76,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.adminHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px;
-}
-</style>

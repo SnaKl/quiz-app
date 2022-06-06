@@ -1,24 +1,21 @@
 <!-- Component used to edit a question (in creation and edition mode) -->
 <template>
-  <div class="adminHeader">
-    <div>
-      <h1><I18nTextComponent i18n-key="adminPage" /></h1>
-      <h2><I18nTextComponent i18n-key="questionEditing" /></h2>
-    </div>
-
-    <div>
+  <h1 class="my-5"><I18nTextComponent i18n-key="adminPage" /></h1>
+  <div class="d-flex justify-content-between">
+    <h2><I18nTextComponent i18n-key="questionEditing" /></h2>
+    <nav>
       <button
         class="btn btn-danger mx-2"
         @click="() => $router.push('/admin/questions')"
+        type="button"
       >
-        <I18nTextComponent i18n-key="cancel" />
+        <i class="bi bi-arrow-left"></i> <I18nTextComponent i18n-key="cancel" />
       </button>
-      <button class="btn btn-primary" @click="saveQuestion">
-        <I18nTextComponent i18n-key="saveQuestion" />
+      <button class="btn btn-primary" @click="saveQuestion" type="button">
+        <i class="bi bi-save"></i> <I18nTextComponent i18n-key="save" />
       </button>
-    </div>
+    </nav>
   </div>
-
   <!-- Only show question when we have loaded it -->
   <div v-if="!existingQuestion || question">
     <QuestionDisplay
@@ -28,14 +25,14 @@
       :question="question"
     />
   </div>
-  <span v-else>Loading ...</span>
+  <span v-else>Chargement ...</span>
 </template>
 
 <script>
 import ParticipationStorageService from '@/services/ParticipationStorageService';
 import QuestionDisplay from '@/components/QuestionDisplay.vue';
 import QuizApiService from '@/services/QuizApiService';
-import I18nTextComponent from '../components/I18nTextComponent.vue';
+import I18nTextComponent from '@/components/I18nTextComponent.vue';
 
 export default {
   name: 'AdminPageQuestionEdition',

@@ -1,28 +1,31 @@
 <!-- List of the question available on the Admin Panel (it's like the home page of the admin panel) -->
 <template>
-  <div class="adminHeader">
-    <div>
-      <h1><I18nTextComponent i18n-key="adminPage" /></h1>
+  <div class="mb-5">
+    <h1 class="my-5"><I18nTextComponent i18n-key="adminPage" /></h1>
+    <div class="d-flex justify-content-between">
       <h2><I18nTextComponent i18n-key="questionList" /></h2>
+      <nav>
+        <button
+          class="btn btn-primary addQuestionButton"
+          @click="() => this.$router.push('/admin/questions/add')"
+        >
+          <i class="bi bi-plus-square"></i>
+          <I18nTextComponent i18n-key="addQuestion" />
+        </button>
+      </nav>
     </div>
-    <button
-      class="btn btn-primary addQuestionButton"
-      @click="() => this.$router.push('/admin/questions/add')"
-    >
-      <I18nTextComponent i18n-key="addQuestion" />
-    </button>
   </div>
   <table class="table" v-if="questions">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">#</th>
+        <th scope="col" class="text-end">#</th>
         <th scope="col"><I18nTextComponent i18n-key="title" /></th>
         <th scope="col"><I18nTextComponent i18n-key="viewQuestion" /></th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="question in questions" v-bind:key="question.position">
-        <th scope="row">{{ question.position }}</th>
+        <th scope="row" class="text-end">{{ question.position }}</th>
         <td>{{ question.title }}</td>
         <td>
           <a :href="'/admin/questions/' + question.position"
@@ -36,8 +39,8 @@
 
 <script>
 import ParticipationStorageService from '@/services/ParticipationStorageService';
-import QuizApiService from '../services/QuizApiService';
-import I18nTextComponent from '../components/I18nTextComponent.vue';
+import QuizApiService from '@/services/QuizApiService';
+import I18nTextComponent from '@/components/I18nTextComponent.vue';
 
 export default {
   name: 'AdminPageQuestions',

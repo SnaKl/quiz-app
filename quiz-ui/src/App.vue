@@ -11,7 +11,7 @@ import Toast from '@/components/ToastComponent.vue';
     <Navbar />
   </header>
 
-  <div id="mainContainer" class="container my-auto">
+  <div id="mainContainer" class="container my-auto h-100">
     <RouterView />
   </div>
 
